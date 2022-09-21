@@ -1,4 +1,4 @@
-# Shadowrocket: 2022-09-21 12:43:16
+# Shadowrocket: 2022-09-21 22:07:33
 [General]
 include = 无
 bypass-system = true
@@ -260,7 +260,6 @@ DOMAIN-SUFFIX,prestashop.com,DIRECT
 DOMAIN-SUFFIX,prezi.com,DIRECT
 DOMAIN-SUFFIX,privacyshield.gov,DIRECT
 DOMAIN-SUFFIX,psychologytoday.com,DIRECT
-DOMAIN-SUFFIX,qq.com,DIRECT
 DOMAIN-SUFFIX,rambler.ru,DIRECT
 DOMAIN-SUFFIX,rbc.ru,DIRECT
 DOMAIN-SUFFIX,repubblica.it,DIRECT
@@ -853,38 +852,38 @@ taobao.com = server:223.6.6.6
 *.taobao.com = server:223.6.6.6
 tmall.com = server:223.6.6.6
 *.tmall.com = server:223.6.6.6
-jd.com = server:119.29.29.29
-*.jd.com = server:119.28.28.28
-*.qq.com = server:119.28.28.28
-*.tencent.com = server:119.28.28.28
+jd.com = server:223.5.5.5
+*.jd.com = server:223.5.5.5
+*.qq.com = server:208.67.222.222
+*.tencent.com = server:208.67.222.222
+weixin.com = server:208.67.222.222
+*.weixin.com = server:208.67.222.222
 *.alicdn.com = server:223.5.5.5
 aliyun.com = server:223.5.5.5
 *.aliyun.com = server:223.5.5.5
-weixin.com = server:119.28.28.28
-*.weixin.com = server:119.28.28.28
-bilibili.com = server:119.29.29.29
-*.bilibili.com = server:119.29.29.29
-hdslb.com = server:119.29.29.29
-163.com = server:119.29.29.29
-*.163.com = server:119.29.29.29
-126.com = server:119.29.29.29
-*.126.com = server:119.29.29.29
-*.126.net = server:119.29.29.29
-*.127.net = server:119.29.29.29
-*.netease.com = server:119.29.29.29
-mi.com = server:119.29.29.29
-*.mi.com = server:119.29.29.29
-xiaomi.com = server:119.29.29.29
-*.xiaomi.com = server:119.29.29.29
-*.unicompayment.com = server:119.29.29.29
-*.ximalaya.com = server:119.29.29.29
-*.vercel.app = server:119.29.29.29
-*.vercel.com = server:119.29.29.29
-*.baidu.com = server:119.29.29.29
-*.bdstatic.com = server:119.29.29.29
+bilibili.com = server:223.5.5.5
+*.bilibili.com = server:223.5.5.5
+hdslb.com = server:1.1.1.2
+163.com = server:223.5.5.5
+*.163.com = server:223.5.5.5
+126.com = server:223.5.5.5
+*.126.com = server:223.5.5.5
+*.126.net = server:223.5.5.5
+*.127.net = server:223.5.5.5
+*.netease.com = server:223.5.5.5
+mi.com = server:223.5.5.5
+*.mi.com = server:223.5.5.5
+xiaomi.com = server:223.5.5.5
+*.xiaomi.com = server:223.5.5.5
+*.unicompayment.com = server:223.5.5.5
+*.ximalaya.com = server:223.5.5.5
+*.vercel.app = server:223.5.5.5
+*.vercel.com = server:223.5.5.5
+*.baidu.com = server:223.5.5.5
+*.bdstatic.com = server:223.5.5.5
 mtalk.google.com = 108.177.125.188
-dl.google.com = server:119.29.29.29
-dl.l.google.com = server:119.29.29.29
+dl.google.com = server:223.5.5.5
+dl.l.google.com = server:223.5.5.5
 #YouTube
 redirector.c.youtube.com = 61.91.161.217
 uploads.stage.gdata.youtube.com = 61.91.161.217
