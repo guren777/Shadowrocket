@@ -1,5 +1,7 @@
-# Shadowrocket: 2022-09-21 22:07:33
+# Shadowrocket: 2022-09-22 17:31:14
 [General]
+hijack-dns = 119.29.29.29:53,119.28.28.28:53,182.254.118.118:53,182.252.116.116:53,223.5.5.5:53,223.6.6.6:53,114.114.114.114:53,180.76.76.76:53,8.8.8.8:53,8.8.4.4:53
+private-ip-answer = true
 include = 无
 bypass-system = true
 skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlytics.com, captive.apple.com
@@ -25,6 +27,7 @@ Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tole
 Auto🤖 = url-test,policy-regex-filter=.*,interval=300,tolerance=50,url=http://www.gstatic.com/generate_204,timeout=3,select=15
 
 [Rule]
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Hijacking.list,REJECT
 DOMAIN-KEYWORD,bsc-dataseed,BINANCE🎰
 DOMAIN-KEYWORD,pancakeswap,BINANCE🎰
 DOMAIN-KEYWORD,tokenpocket,BINANCE🎰
@@ -351,7 +354,6 @@ DOMAIN-SUFFIX,zendesk.com,DIRECT
 DOMAIN-SUFFIX,ziddu.com,DIRECT
 DOMAIN-SUFFIX,zoom.us,DIRECT
 DOMAIN-SUFFIX,cn,DIRECT
-GEOIP,CN,DIRECT
 # 手工定义的 Direct 列表
 #153
 DOMAIN-SUFFIX,icloud-content.com,DIRECT
@@ -683,7 +685,6 @@ IP-CIDR,10.0.0.0/8,DIRECT
 IP-CIDR,172.16.0.0/12,DIRECT
 IP-CIDR,127.0.0.0/8,DIRECT
 # China
-GEOIP,CN,DIRECT
 #instagram
 DOMAIN-SUFFIX,cdninstagram.com,PROXY
 #disqus
@@ -806,6 +807,9 @@ DOMAIN-SUFFIX,valid.origin-apple.com.akadns.net,PROXY
 DOMAIN-SUFFIX,phobos.apple.com,PROXY
 # linkedin
 DOMAIN-SUFFIX,linkedin.com,PROXY
+# China
+GEOIP,CN,DIRECT
+# Final
 FINAL,PROXY
 
 [Host]
