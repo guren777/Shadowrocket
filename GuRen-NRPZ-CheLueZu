@@ -1,5 +1,6 @@
 # 懒人配置（含策略组）
 # 更新时间：2024-07-15
+update-url = https://raw.githubusercontent.com/guren777/Shadowrocket/main/GuRen-NRPZ-CheLueZu
 # Shadowrocket添加配置方法：配置 - 右上角➕ - 粘贴配置链接 - 下载 - 点击对应的配置文件 - 使用配置。
 [General]
 # Shadowrocket快速使用方法：
@@ -50,7 +51,7 @@ tun-included-routes =
 # 总是真实IP。此选项要求Shadowrocket在TUN处理DNS请求时返回一个真实的IP地址而不是假的IP地址。
 always-real-ip = 
 # DNS劫持。有些设备或软件总是使用硬编码的DNS服务器，例如Netflix通过Google DNS(8.8.8.8或8.8.4.4)发送请求，您可以使用此选项来劫持查询。
-hijack-dns = 119.29.29.29:53,119.28.28.28:53,182.254.118.118:53,182.252.116.116:53,223.5.5.5:53,223.6.6.6:53,114.114.114.114:53,180.76.76.76:53,8.8.8.8:53,8.8.4.4:53
+hijack-dns =119.29.29.29:53,119.28.28.28:53,182.254.118.118:53,182.252.116.116:53,223.5.5.5:53,223.6.6.6:53,114.114.114.114:53,180.76.76.76:53,8.8.8.8:53,8.8.4.4:53
 # 当UDP流量匹配到规则里不支持UDP转发的节点策略时重新选择回退行为，可选行为包括DIRECT、REJECT。DIRECT表示直连转发UDP流量，REJECT表示拒绝转发UDP流量。
 udp-policy-not-supported-behaviour = REJECT
 # 包含配置。如“include=a.conf”表示当前配置包含另一个配置a.conf的内容，当前配置的优先级高于a.conf。此选项是对配置建立包含关系，以满足同时使用多个配置的需求。
@@ -121,30 +122,13 @@ include =
 # 开启订阅筛选的代理分组，示例：
 # 名称=类型(如select,url-test,fallback,load-balance,random),订阅名称(多个订阅时,用逗号分隔),use=true,policy-regex-filter=正则式或关键词筛选(省略该参数时,表示匹配对应订阅的全部节点),interval=测试周期,timeout=超时时间,tolerance=公差,policy-select-name=指定选择的节点备注名称,select=默认策略(0表示第一个策略,1表示第二个策略,2表示第三个策略……),url=测试地址
 # ----------
-[Proxy]
-# 策略组
-# 腾讯
-# 币安
-# 美洲
-# 欧洲
-# 亚洲
-# 自动选择
-
-[Rule]
-DOMAIN-KEYWORD,bsc-dataseed,BINANCE🎰
-DOMAIN-KEYWORD,pancakeswap,BINANCE🎰
-DOMAIN-KEYWORD,tokenpocket,BINANCE🎰
-DOMAIN-KEYWORD,bcebos,BINANCE🎰
-DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
-DOMAIN-KEYWORD,cfptop,香港🇭🇰
-DOMAIN-KEYWORD,coffeepp,香港🇭🇰
-DOMAIN-KEYWORD,youtube,AUTO🤖
 Tencent🐧 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=50,timeout=3,select=11,policy-regex-filter=(?i)(韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|美国|🇺🇸)
 Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=50,timeout=3,select=4,policy-regex-filter=(?i)(香港|🇭🇰|台湾|日本|🇯🇵|新加坡|🇸🇬|韩国|🇰🇷|马来西亚|🇲🇾)
 美洲🟢🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(美国|🇺🇸|加拿大|🇨🇦|墨西哥|🇲🇽|巴西|🇧🇷|阿根廷|🇦🇷|智利|🇨🇱|哥伦比亚|🇨🇴|牙买加|🇯🇲|巴拉圭|🇵🇾|海地|🇭🇹)
 欧洲🟣🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🔴🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
 Auto🤖 = url-test,policy-regex-filter=.*,interval=300,tolerance=50,url=http://www.gstatic.com/generate_204,timeout=3,select=15
+
 ChatGPT = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 YouTube = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 Netflix = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
@@ -171,32 +155,6 @@ Amazon = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节
 
 [Rule]
 # 规则类型：
-# 隐私保护
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,REJECT
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT
-# 反劫持
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,REJECT
-RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Hijacking.list,REJECT
-# Instagram
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Instagram/Instagram.list,AUTO🤖
-# Telegram
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list,AUTO🤖
-# Whatsapp
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list,AUTO🤖
-# Twitter
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list,AUTO🤖
-# Spotify
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list,DIRECT
-# YouTube
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list,AUTO🤖
-# Facebook
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list,AUTO🤖
-# Binance
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
-# WeChat
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/WeChat/WeChat.list,TENCENT🐧
-# Tencent
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Tencent/Tencent.list,TENCENT🐧
 # DOMAIN-SUFFIX：匹配请求域名的后缀。如“DOMAIN-SUFFIX,example.com,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
 # DOMAIN-KEYWORD：匹配请求域名的关键词。如“DOMAIN-KEYWORD,exa,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
 # DOMAIN：匹配请求的完整域名。如“DOMAIN,www.example.com,DIRECT”只能匹配到“www.example.com”。
@@ -238,6 +196,14 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # ----------
 # 国外常用服务单独分流：YouTube，Netflix，Disney+，HBO，Spotify，Telegram，PayPal，Twitter，Facebook，Google，TikTok，GitHub，ChatGPT。
 # 国内常用服务单独分流：苹果服务，微软服务，哔哩哔哩，网易云音乐，游戏平台，亚马逊，百度，豆瓣，微信，抖音，新浪，知乎，小红书。
+DOMAIN-KEYWORD,bsc-dataseed,BINANCE🎰
+DOMAIN-KEYWORD,pancakeswap,BINANCE🎰
+DOMAIN-KEYWORD,tokenpocket,BINANCE🎰
+DOMAIN-KEYWORD,bcebos,BINANCE🎰
+DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
+DOMAIN-KEYWORD,cfptop,香港🇭🇰
+DOMAIN-KEYWORD,coffeepp,香港🇭🇰
+DOMAIN-KEYWORD,youtube,AUTO🤖
 # EasyPrivacy
 DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,REJECT
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy.list,REJECT
