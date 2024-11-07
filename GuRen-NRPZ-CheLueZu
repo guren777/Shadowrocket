@@ -128,7 +128,6 @@ Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tole
 欧洲🟣🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🔴🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
 Auto🤖 = url-test,policy-regex-filter=.*,interval=300,tolerance=50,url=http://www.gstatic.com/generate_204,timeout=3,select=15
-
 ChatGPT = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 YouTube = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 Netflix = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
