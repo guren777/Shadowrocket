@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-09 04:00:13
+# Shadowrocket: 2024-11-09 04:05:40
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -121,15 +121,15 @@ update-url = https://raw.githubusercontent.com/guren777/Shadowrocket/main/GuRen-
 # 开启订阅筛选的代理分组，示例：
 # 名称=类型(如select,url-test,fallback,load-balance,random),订阅名称(多个订阅时,用逗号分隔),use=true,policy-regex-filter=正则式或关键词筛选(省略该参数时,表示匹配对应订阅的全部节点),interval=测试周期,timeout=超时时间,tolerance=公差,policy-select-name=指定选择的节点备注名称,select=默认策略(0表示第一个策略,1表示第二个策略,2表示第三个策略……),url=测试地址
 # ----------
-ChatGPT🤖 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=100,timeout=5,select=0,policy-regex-filter=ChatGPT
+ChatGPT🤖 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=ChatGPT
 Tencent🐧 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=50,timeout=3,select=11,policy-regex-filter=(?i)(韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|美国|🇺🇸)
 Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=50,timeout=3,select=4,policy-regex-filter=(?i)(香港|🇭🇰|台湾|日本|🇯🇵|新加坡|🇸🇬|韩国|🇰🇷|马来西亚|🇲🇾)
-美国🇺🇸 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(美国|🇺🇸)
-新加坡🇸🇬 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(新加坡|🇸🇬)
-韩国🇰🇷 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(韩国|🇰🇷)
-日本🇯🇵 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(日本|🇯🇵)
-香港🇭🇰 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰)
-台湾🌀 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(台湾| TW|Taiwan|taiwan|台北|台中|新北|彰化)
+美国🇺🇸 = url-test,policy-select-name=美国|02隧道,interval=600,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸)
+新加坡🇸🇬 = url-test,policy-select-name=新加坡|01|直连快,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(新加坡|🇸🇬)
+韩国🇰🇷 = url-test,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(韩国|🇰🇷)
+日本🇯🇵 = url-test,policy-select-name=日本|03|直连快,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(日本|🇯🇵)
+香港🇭🇰 = url-test,policy-select-name=香港|01|隧道,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(香港|🇭🇰)
+台湾🌀 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=300,tolerance=50,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(台湾| TW|Taiwan|taiwan|台北|台中|新北|彰化)
 美洲🌎 = url-test,policy-select-name=美国|02隧道,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸|加拿大|🇨🇦|墨西哥|🇲🇽|巴西|🇧🇷|阿根廷|🇦🇷|智利|🇨🇱|哥伦比亚|🇨🇴|牙买加|🇯🇲|巴拉圭|🇵🇾|海地|🇭🇹)
 欧洲🇪🇺 = url-test,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🌏 = url-test,policy-select-name=日本|03|直连快,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
