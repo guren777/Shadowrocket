@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-07 22:42:58
+# Shadowrocket: 2024-11-08 19:02:27
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -20,14 +20,13 @@
 # 3.手机设置 - 通用 - 关于本机 - 证书信任设置 - 开启对应Shadowrocket证书信任。
 # ----------
 # 旁路系统。如果禁用此选项，可能会导致一些系统问题，如推送通知延迟。
-hijack-dns = 119.29.29.29:53,119.28.28.28:53,182.254.118.118:53,182.252.116.116:53,223.5.5.5:53,223.6.6.6:53,114.114.114.114:53,180.76.76.76:53,8.8.8.8:53,8.8.4.4:53
-private-ip-answer = true
-include = 无
 bypass-system = true
-skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.crashlytics.com, captive.apple.com
-bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
-dns-server = quic://dns.adguard-dns.com,94.140.14.14,94.140.15.15,https://dns.quad9.net/dns-query,9.9.9.9,149.112.112.112,https://doh.opendns.com/dns-query,208.67.222.222,208.67.220.220,https://security.cloudflare-dns.com/dns-query,1.1.1.2,1.0.0.2,https://doh.applied-privacy.net/quer,https://public.dns.iij.jp/dns-query
+# 跳过代理。此选项强制这些域名或IP的连接范围由Shadowrocket TUN接口来处理，而不是Shadowrocket代理服务器。此选项用于解决一些应用程序的一些兼容性问题。
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com
+# TUN旁路路由。Shadowrocket TUN接口只能处理TCP协议。使用此选项可以绕过指定的IP范围，让其他协议通过。
+tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32
 # DNS覆写。使用普通DNS或加密DNS（如doh、doq、dot等）覆盖默认的系统DNS。有些dns over https支持http3，所以尝试查询，如果支持就切换到http3，可在doh链接后面加上#no-h3关闭。doh强制通过h3查询的写法是将“https”改成“h3”，如h3://dns.alidns.com/dns-query。
+dns-server = quic://dns.adguard-dns.com,94.140.14.14,94.140.15.15,https://dns.quad9.net/dns-query,9.9.9.9,149.112.112.112,https://doh.opendns.com/dns-query,208.67.222.222,208.67.220.220,https://security.cloudflare-dns.com/dns-query,1.1.1.2,1.0.0.2,https://doh.applied-privacy.net/quer,https://public.dns.iij.jp/dns-query
 # 备用DNS。当覆写DNS查询失败或查询时间超过2秒，Shadowrocket会自动回退备用DNS。如需指定多个DNS，可用逗号分隔。system表示回退到系统DNS。
 fallback-dns-server = system
 # 启用IPv6支持。false表示不启用，true表示启用。（注：即使不启用此选项，当本地网络环境支持IPv6，并且节点域名支持IPv6解析，Shadowrocket也会使用节点的IPv6地址进行访问。解决方法是关闭节点域名的IPv6解析，或者在配置文件的[Host]项目下为节点域名指定IP地址。）
@@ -41,6 +40,7 @@ icmp-auto-reply = true
 # 不开启时，「重写的REJECT策略」默认只有在配置模式下生效。开启后，可以令该策略在其他全局路由模式下都生效。
 always-reject-url-rewrite = false
 # 私有IP应答。如果不启用此选项，域名解析返回私有IP，Shadowrocket会认为该域名被劫持而强制使用代理。
+private-ip-answer = true
 # 直连域名解析失败后使用代理。false表示不启用。
 dns-direct-fallback-proxy = true
 # TUN包含路由。默认情况下，Shadowrocket接口会声明自己为默认路由，但由于Wi-Fi接口的路由较小，有些流量可能不会通过Shadowrocket接口。使用此选项可以添加一个较小的路由表。
@@ -48,9 +48,11 @@ tun-included-routes =
 # 总是真实IP。此选项要求Shadowrocket在TUN处理DNS请求时返回一个真实的IP地址而不是假的IP地址。
 always-real-ip = 
 # DNS劫持。有些设备或软件总是使用硬编码的DNS服务器，例如Netflix通过Google DNS(8.8.8.8或8.8.4.4)发送请求，您可以使用此选项来劫持查询。
+hijack-dns = 119.29.29.29:53,119.28.28.28:53,182.254.118.118:53,182.252.116.116:53,223.5.5.5:53,223.6.6.6:53,114.114.114.114:53,180.76.76.76:53,8.8.8.8:53,8.8.4.4:53
 # 当UDP流量匹配到规则里不支持UDP转发的节点策略时重新选择回退行为，可选行为包括DIRECT、REJECT。DIRECT表示直连转发UDP流量，REJECT表示拒绝转发UDP流量。
 udp-policy-not-supported-behaviour = REJECT
 # 包含配置。如“include=a.conf”表示当前配置包含另一个配置a.conf的内容，当前配置的优先级高于a.conf。此选项是对配置建立包含关系，以满足同时使用多个配置的需求。
+include = 
 # 此选项允许返回一个虚假的IP地址，如“stun-response-ip=1.1.1.1”、“stun-response-ipv6=::1”，目的是防止真实IP地址泄漏，提高WebRTC的隐私和安全性。
 # stun-response-ip =
 # stun-response-ipv6 =
@@ -131,6 +133,7 @@ Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tole
 欧洲🇪🇺🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🌏🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
 Auto⚖️ = url-test,url=http://www.gstatic.com/generate_204,interval=300,tolerance=50,timeout=3,select=15,policy-regex-filter=.*
+ChatGPT = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 YouTube = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 Netflix = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 Disney+ = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
@@ -147,12 +150,6 @@ Amazon = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节
 微软服务 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 哔哩哔哩 = select,DIRECT,PROXY,香港节点,台湾节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 游戏平台 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
-香港节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=HK|Hong|hong|香港|深港|沪港|京港|港
-台湾节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=TW|Taiwan|taiwan|台湾|台北|台中|新北|彰化
-日本节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=JP|Japan|japan|Tokyo|tokyo|日本|东京|大阪|京日|苏日|沪日|上日|川日|深日|广日
-新加坡节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=SG|Sing|sing|新加坡|狮城|沪新|京新|深新|杭新|广新
-韩国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=KR|Korea|korea|KOR|韩国|首尔|韩|韓|春川
-美国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=0,timeout=5,select=0,policy-regex-filter=US|USA|America|america|United States|美国|凤凰城|洛杉矶|西雅图|芝加哥|纽约|沪美|美
 
 [Rule]
 # 规则类型：
@@ -197,15 +194,6 @@ Amazon = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节
 # ----------
 # 国外常用服务单独分流：YouTube，Netflix，Disney+，HBO，Spotify，Telegram，PayPal，Twitter，Facebook，Google，TikTok，GitHub，ChatGPT。
 # 国内常用服务单独分流：苹果服务，微软服务，哔哩哔哩，网易云音乐，游戏平台，亚马逊，百度，豆瓣，微信，抖音，新浪，知乎，小红书。
-DOMAIN-KEYWORD,chat.openai,CHATGPT🤖
-DOMAIN-KEYWORD,bsc-dataseed,BINANCE🎰
-DOMAIN-KEYWORD,pancakeswap,BINANCE🎰
-DOMAIN-KEYWORD,tokenpocket,BINANCE🎰
-DOMAIN-KEYWORD,bcebos,BINANCE🎰
-DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
-DOMAIN-KEYWORD,cfptop,香港🇭🇰
-DOMAIN-KEYWORD,coffeepp,香港🇭🇰
-DOMAIN-KEYWORD,youtube,AUTO⚖️
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Apple/Apple.list,苹果服务
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BiliBili/BiliBili.list,哔哩哔哩
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/NetEaseMusic/NetEaseMusic.list,DIRECT
@@ -264,5 +252,7 @@ localhost = 127.0.0.1
 ^https?://(www.)?google.cn https://www.google.com 302
 
 [MITM]
+enable = true
+ca-p12 = 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
 # Shadowrocket仅会解密hostname指定的域名的请求，可以使用通配符。也可以使用前缀 - 排除特定主机名，如 -*.example.com。iOS系统和某些应用有严格的安全策略，仅信任某些特定的证书，对这些域名启动解密可能导致问题，如 *.apple.com，*.icloud.com。
-hostname = *.google.cn
+hostname = *.google.cn,*.googlevideo.com
