@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-08 21:02:32
+# Shadowrocket: 2024-11-08 21:59:27
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -129,6 +129,7 @@ Binance🎰 = url-test,url=http://www.gstatic.com/generate_204,interval=300,tole
 韩国🇰🇷 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(韩国|🇰🇷)
 日本🇯🇵 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(日本|🇯🇵)
 香港🇭🇰 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰)
+台湾🌀 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(台湾| TW|Taiwan|taiwan|台北|台中|新北|彰化)
 美洲🌎🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(美国|🇺🇸|加拿大|🇨🇦|墨西哥|🇲🇽|巴西|🇧🇷|阿根廷|🇦🇷|智利|🇨🇱|哥伦比亚|🇨🇴|牙买加|🇯🇲|巴拉圭|🇵🇾|海地|🇭🇹)
 欧洲🇪🇺🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🌏🪜 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
