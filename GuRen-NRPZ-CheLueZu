@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-09 18:12:33
+# Shadowrocket: 2024-11-09 18:56:42
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -22,7 +22,7 @@
 # 旁路系统。如果禁用此选项，可能会导致一些系统问题，如推送通知延迟。
 bypass-system = true
 # 跳过代理。此选项强制这些域名或IP的连接范围由Shadowrocket TUN接口来处理，而不是Shadowrocket代理服务器。此选项用于解决一些应用程序的一些兼容性问题。
-skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com,*.apple.com,*.itunes.apple.com
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com
 # TUN旁路路由。Shadowrocket TUN接口只能处理TCP协议。使用此选项可以绕过指定的IP范围，让其他协议通过。
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32
 # DNS覆写。使用普通DNS或加密DNS（如doh、doq、dot等）覆盖默认的系统DNS。有些dns over https支持http3，所以尝试查询，如果支持就切换到http3，可在doh链接后面加上#no-h3关闭。doh强制通过h3查询的写法是将“https”改成“h3”，如h3://dns.alidns.com/dns-query。
@@ -209,7 +209,7 @@ RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadow
 # Google
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,AUTO🏧自动
 # Global
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,AUTO🏧自动
+#RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,AUTO🏧自动
 # OpenAI
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list,CHATGPT🤖
 # GitHub
@@ -279,7 +279,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/XiaoHongShu/XiaoHongShu.list,DIRECT🇨🇳直连
 # China
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT🇨🇳直连
-#DOMAIN-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/China/China_Domain.list,DIRECT🇨🇳直连
+DOMAIN-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/China/China_Domain.list,DIRECT🇨🇳直连
 # ChinaIPs
 #RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list,直连🇨🇳DIRECT
 # 本地局域网地址的规则集。
@@ -287,6 +287,96 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # 表示CN地区的IP分流走直连，GEOIP数据库用来判断IP是否属于CN地区。默认使用Shadowrocket自带的GEOIP数据库，如果您想替换其他数据库，可在 设置 - GeoLite2数据库 里添加和修改。
 GEOIP,CN,DIRECT🇨🇳直连
 # 表示当其他所有规则都匹配不到时才使用FINAL规则的策略。
+# 手工定义规则
+#苹果域名及其CDN 直连
+DOMAIN-SUFFIX,a3.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,a1.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,a2.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,a5.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,a4.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,appldnld.apple.com,DIRECT
+DOMAIN-SUFFIX,cdn-cn1.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,apps.apple.com,DIRECT
+DOMAIN-SUFFIX,apps.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,cdn-cn2.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cdn-cn3.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,appleid.cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,cdn-cn4.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cdn2.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cdn1.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cdn4.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cdn3.apple-mapkit.com,DIRECT
+DOMAIN-SUFFIX,cds.apple.com,DIRECT
+DOMAIN-SUFFIX,adcdownload.apple.com,DIRECT
+DOMAIN-SUFFIX,cl2.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
+DOMAIN-SUFFIX,cl2-cn.apple.com,DIRECT
+DOMAIN-SUFFIX,cl2.apple.com,DIRECT
+DOMAIN-SUFFIX,cl4-cn.apple.com,DIRECT
+DOMAIN-SUFFIX,cl1.apple.com,DIRECT
+DOMAIN-SUFFIX,cl5.apple.com,DIRECT
+DOMAIN-SUFFIX,cl3.apple.com,DIRECT
+DOMAIN-SUFFIX,cl4.apple.com,DIRECT
+DOMAIN-SUFFIX,clientflow.apple.com,DIRECT
+DOMAIN-SUFFIX,configuration.apple.com,DIRECT
+DOMAIN-SUFFIX,cstat.apple.com,DIRECT
+DOMAIN-SUFFIX,download.developer.apple.com,DIRECT
+DOMAIN-SUFFIX,gsp11-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gsp12-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gsp13-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gsp4-cn.ls.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
+DOMAIN-SUFFIX,gsp4-cn.ls.apple.com.edgekey.net,DIRECT
+DOMAIN-SUFFIX,gsp4-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gsp5-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gspe19-cn-ssl.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gspe19-cn.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,gspe21-ssl.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,iadsdk.apple.com,DIRECT
+DOMAIN-SUFFIX,gspe35-ssl.ls.apple.com,DIRECT
+DOMAIN-SUFFIX,images.apple.com.akadns.net,DIRECT
+DOMAIN-SUFFIX,images.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
+DOMAIN-SUFFIX,icloud.cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,init-p01md.apple.com,DIRECT
+DOMAIN-SUFFIX,images.apple.com,DIRECT
+DOMAIN-SUFFIX,init-p01st.push.apple.com,DIRECT
+DOMAIN-SUFFIX,iosapps.itunes.g.aaplimg.com,DIRECT
+DOMAIN-SUFFIX,iphone-ld.apple.com,DIRECT
+DOMAIN-SUFFIX,is1-ssl.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,init-s01st.push.apple.com,DIRECT
+DOMAIN-SUFFIX,is1.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is2-ssl.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is2.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is3-ssl.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is3.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is4-ssl.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is4.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is5-ssl.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,is5.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,mesu.apple.com,DIRECT
+DOMAIN-SUFFIX,itunesconnect.apple.com,DIRECT
+DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+DOMAIN-SUFFIX,ocsp.apple.com,DIRECT
+DOMAIN-SUFFIX,pancake.apple.com,DIRECT
+DOMAIN-SUFFIX,oscdn.apple.com,DIRECT
+DOMAIN-SUFFIX,s.mzstatic.com,DIRECT
+DOMAIN-SUFFIX,music.apple.com,DIRECT
+DOMAIN-SUFFIX,store.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
+DOMAIN-SUFFIX,store.apple.com.edgekey.net,DIRECT
+DOMAIN-SUFFIX,store.apple.com,DIRECT
+DOMAIN-SUFFIX,store.storeimages.cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,support.apple.com,DIRECT
+DOMAIN-SUFFIX,swcdn.g.aaplimg.com,DIRECT
+DOMAIN-SUFFIX,swcdn.apple.com,DIRECT
+DOMAIN-SUFFIX,swcatalog.apple.com,DIRECT
+DOMAIN-SUFFIX,reserve-prime.apple.com,DIRECT
+DOMAIN-SUFFIX,updates-http.cdn-apple.com.akadns.net,DIRECT
+DOMAIN-SUFFIX,swscan.apple.com,DIRECT
+DOMAIN-SUFFIX,swdist.apple.com,DIRECT
+DOMAIN-SUFFIX,updates-http.cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,updates.cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,www.apple.com.edgekey.net.globalredir.akadns.net,DIRECT
+DOMAIN-SUFFIX,www.apple.com.edgekey.net,DIRECT
+DOMAIN-SUFFIX,valid.apple.com,DIRECT
+DOMAIN-SUFFIX,www.apple.com,DIRECT
 FINAL,PROXY
 
 [Host]
