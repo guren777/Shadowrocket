@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-09 15:38:40
+# Shadowrocket: 2024-11-09 18:06:55
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -22,7 +22,7 @@
 # 旁路系统。如果禁用此选项，可能会导致一些系统问题，如推送通知延迟。
 bypass-system = true
 # 跳过代理。此选项强制这些域名或IP的连接范围由Shadowrocket TUN接口来处理，而不是Shadowrocket代理服务器。此选项用于解决一些应用程序的一些兼容性问题。
-skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,captive.apple.com,*.ccb.com,*.abchina.com.cn,*.psbc.com,www.baidu.com,*.apple.com,*.itunes.apple.com
 # TUN旁路路由。Shadowrocket TUN接口只能处理TCP协议。使用此选项可以绕过指定的IP范围，让其他协议通过。
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32, 239.255.255.250/32
 # DNS覆写。使用普通DNS或加密DNS（如doh、doq、dot等）覆盖默认的系统DNS。有些dns over https支持http3，所以尝试查询，如果支持就切换到http3，可在doh链接后面加上#no-h3关闭。doh强制通过h3查询的写法是将“https”改成“h3”，如h3://dns.alidns.com/dns-query。
@@ -124,7 +124,7 @@ update-url = https://raw.githubusercontent.com/guren777/Shadowrocket/main/GuRen-
 ChatGPT🤖 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=ChatGPT
 Tencent🐧 = url-test,policy-select-name=美国|03奈飞CHATGPT1,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|美国|🇺🇸)
 Binance🎰 = url-test,policy-select-name=日本3直连快,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(香港|🇭🇰|台湾|日本|🇯🇵|新加坡|🇸🇬|韩国|🇰🇷|马来西亚|🇲🇾)
-美国🇺🇸 = url-test,policy-select-name=美国|02隧道,interval=600,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸)
+美国🇺🇸 = url-test,policy-select-name=美国|02隧道,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸)
 新加坡🇸🇬 = url-test,policy-select-name=新加坡|01|直连快,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(新加坡|🇸🇬)
 韩国🇰🇷 = url-test,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(韩国|🇰🇷)
 日本🇯🇵 = url-test,policy-select-name=日本|03|直连快,interval=300,tolerance=100,timeout=3,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(日本|🇯🇵)
@@ -133,10 +133,10 @@ Binance🎰 = url-test,policy-select-name=日本3直连快,interval=300,toleranc
 美洲🌎 = url-test,policy-select-name=美国|02隧道,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸|加拿大|🇨🇦|墨西哥|🇲🇽|巴西|🇧🇷|阿根廷|🇦🇷|智利|🇨🇱|哥伦比亚|🇨🇴|牙买加|🇯🇲|巴拉圭|🇵🇾|海地|🇭🇹)
 欧洲🇪🇺 = url-test,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🌏 = url-test,policy-select-name=日本|03|直连快,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
-自动🏧AUTO = url-test,policy-select-name=台湾|04奈飞CHATGPT3,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=.*
-拒绝❌REJECT = select,REJECT,policy-select-name=REJECT
-代理🪜PROXY = select,自动🏧AUTO
-直连🇨🇳DIRECT = select,DIRECT,policy-select-name=DIRECT
+AUTO🏧自动 = url-test,policy-select-name=台湾|04奈飞CHATGPT3,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=.*
+REJECT❌拒绝 = select,REJECT,policy-select-name=REJECT
+PROXY🪜代理 = select,AUTO🏧自动,policy-select-name=AUTO🏧自动
+DIRECT🇨🇳直连 = select,DIRECT,policy-select-name=DIRECT
 Netflix📀 = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,policy-select-name=PROXY
 Disney+ = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 HBO = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
@@ -197,35 +197,35 @@ DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
 DOMAIN-KEYWORD,cfptop,香港🇭🇰
 DOMAIN-KEYWORD,coffeepp,香港🇭🇰
 # EasyPrivacy 隐私保护
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,拒绝❌REJECT
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,REJECT❌拒绝
 # Privacy 隐私保护
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,拒绝❌REJECT
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,拒绝❌REJECT
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/Privacy/Privacy.list,拒绝❌REJECT
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,REJECT❌拒绝
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT❌拒绝
+RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT❌拒绝
 # Hijacking 反劫持
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,拒绝❌REJECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,REJECT❌拒绝
 # BlockHttpDNS 反HTTP DNS跟踪
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,拒绝❌REJECT
+RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
 # Google
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,AUTO🏧自动
 # Global
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,AUTO🏧自动
 # OpenAI
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list,CHATGPT🤖
 # GitHub
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list,AUTO🏧自动
 # Spotify
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list,日本🇯🇵
 # YouTube
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list,AUTO🏧自动
 #Telegram
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list,AUTO🏧自动
 # Twitter
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list,AUTO🏧自动
 # Facebook
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list,AUTO🏧自动
 # Whatsapp
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list,自动🏧AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list,AUTO🏧自动
 # Binance
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
 # WeChat
@@ -233,11 +233,11 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # Tencent
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Tencent/Tencent.list,TENCENT🐧
 # PayPal
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/PayPal/PayPal.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/PayPal/PayPal.list,DIRECT🇨🇳直连
 # Amazon
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Amazon/Amazon.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Amazon/Amazon.list,DIRECT🇨🇳直连
 # 微软
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list,DIRECT🇨🇳直连
 # 奈飞
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list,NETFLIX📀
 # 迪士尼
@@ -259,33 +259,33 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # Game
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Game/Game.list,游戏平台🎮
 # Apple
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Apple/Apple.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Apple/Apple.list,苹果服务🍎
 # 高德
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/GaoDe/GaoDe.list,直连🇨🇳DIRECT
+RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/GaoDe/GaoDe.list,DIRECT🇨🇳直连
 # 哔哩哔哩
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BiliBili/BiliBili.list,直连🇨🇳DIRECT
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/NetEaseMusic/NetEaseMusic.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BiliBili/BiliBili.list,DIRECT🇨🇳直连
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/NetEaseMusic/NetEaseMusic.list,DIRECT🇨🇳直连
 # 百度
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Baidu/Baidu.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Baidu/Baidu.list,DIRECT🇨🇳直连
 # 豆瓣
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouBan/DouBan.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouBan/DouBan.list,DIRECT🇨🇳直连
 # 抖音
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouYin/DouYin.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DouYin/DouYin.list,DIRECT🇨🇳直连
 # 新浪
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Sina/Sina.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Sina/Sina.list,DIRECT🇨🇳直连
 # 知乎
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Zhihu/Zhihu.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Zhihu/Zhihu.list,DIRECT🇨🇳直连
 # 小红书
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/XiaoHongShu/XiaoHongShu.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/XiaoHongShu/XiaoHongShu.list,DIRECT🇨🇳直连
 # China
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,直连🇨🇳DIRECT
-DOMAIN-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/China/China_Domain.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT🇨🇳直连
+DOMAIN-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/China/China_Domain.list,DIRECT🇨🇳直连
 # ChinaIPs
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list,直连🇨🇳DIRECT
+#RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list,直连🇨🇳DIRECT
 # 本地局域网地址的规则集。
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list,直连🇨🇳DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list,DIRECT🇨🇳直连
 # 表示CN地区的IP分流走直连，GEOIP数据库用来判断IP是否属于CN地区。默认使用Shadowrocket自带的GEOIP数据库，如果您想替换其他数据库，可在 设置 - GeoLite2数据库 里添加和修改。
-GEOIP,CN,直连🇨🇳DIRECT
+GEOIP,CN,DIRECT🇨🇳直连
 # 表示当其他所有规则都匹配不到时才使用FINAL规则的策略。
 FINAL,PROXY
 
