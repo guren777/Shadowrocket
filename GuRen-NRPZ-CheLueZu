@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-10 15:15:17
+# Shadowrocket: 2024-11-10 15:27:32
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -209,7 +209,7 @@ DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master
 # Hijacking 反劫持
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,REJECT❌拒绝
 # BlockHttpDNS 反HTTP DNS跟踪
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
 # Google
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,AUTO🏧自动
 # OpenAI
