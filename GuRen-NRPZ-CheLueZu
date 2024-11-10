@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-10 13:28:33
+# Shadowrocket: 2024-11-10 14:00:25
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -229,7 +229,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # Whatsapp
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list,AUTO🏧自动
 # Binance 币安交易所
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
 # WeChat
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list,TENCENT🐧
 # Tencent
