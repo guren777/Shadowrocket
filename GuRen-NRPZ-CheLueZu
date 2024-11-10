@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-10 22:30:04
+# Shadowrocket: 2024-11-10 22:37:38
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -233,7 +233,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # PayPal 贝宝支付
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/PayPal/PayPal.list,DIRECT🇨🇳直连
 # Amazon 亚马逊
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AmazonCN,DIRECT🇨🇳直连
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AmazonCN/AmazonCN.list,DIRECT🇨🇳直连
 #RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Amazon/Amazon.list,DIRECT🇨🇳直连
 # Microsoft 微软
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list,DIRECT🇨🇳直连
