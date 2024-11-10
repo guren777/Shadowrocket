@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-09 19:22:25
+# Shadowrocket: 2024-11-10 13:28:33
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -147,6 +147,11 @@ TikTok = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩
 游戏平台🎮 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,REJECT,policy-select-name=REJECT
 
 [Rule]
+DOMAIN-KEYWORD,metrix,BINANCE🎰
+DOMAIN-KEYWORD,bnbstatic,BINANCE🎰
+DOMAIN-KEYWORD,bntrace,BINANCE🎰
+DOMAIN-KEYWORD,binance,BINANCE🎰
+DOMAIN-KEYWORD,branch,BINANCE🎰
 # 规则类型：
 # DOMAIN-SUFFIX：匹配请求域名的后缀。如“DOMAIN-SUFFIX,example.com,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
 # DOMAIN-KEYWORD：匹配请求域名的关键词。如“DOMAIN-KEYWORD,exa,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
@@ -196,16 +201,15 @@ DOMAIN-KEYWORD,bcebos,BINANCE🎰
 DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
 DOMAIN-KEYWORD,cfptop,香港🇭🇰
 DOMAIN-KEYWORD,coffeepp,香港🇭🇰
+# Privacy 隐私保护
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT❌拒绝
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,REJECT❌拒绝
 # EasyPrivacy 隐私保护
 DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,REJECT❌拒绝
-# Privacy 隐私保护
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,REJECT❌拒绝
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT❌拒绝
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/Privacy/Privacy.list,REJECT❌拒绝
 # Hijacking 反劫持
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,REJECT❌拒绝
 # BlockHttpDNS 反HTTP DNS跟踪
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
 # Google
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,AUTO🏧自动
 # OpenAI
@@ -224,8 +228,8 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list,AUTO🏧自动
 # Whatsapp
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list,AUTO🏧自动
-# Binance
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
+# Binance 币安交易所
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/Binance/Binance.list,BINANCE🎰
 # WeChat
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list,TENCENT🐧
 # Tencent
@@ -285,7 +289,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # 表示CN地区的IP分流走直连，GEOIP数据库用来判断IP是否属于CN地区。默认使用Shadowrocket自带的GEOIP数据库，如果您想替换其他数据库，可在 设置 - GeoLite2数据库 里添加和修改。
 GEOIP,CN,DIRECT🇨🇳直连
 # 表示当其他所有规则都匹配不到时才使用FINAL规则的策略。
-# 手工定义规则
+# 手工定义 直连规则
 #苹果域名及其CDN 直连
 DOMAIN-SUFFIX,a3.mzstatic.com,DIRECT
 DOMAIN-SUFFIX,a1.mzstatic.com,DIRECT
