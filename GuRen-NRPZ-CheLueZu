@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-11 12:12:15
+# Shadowrocket: 2024-11-11 12:33:11
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -60,7 +60,7 @@ include =
 # compatibility-mode =
 # 强制所有域名使用本地DNS解析。设置为true表示启用。（此参数为隐藏属性，建议谨慎设置，可能导致相关域名的CDN失效。）
 # always-ip-address =
-update-url = 
+update-url = https://raw.githubusercontent.com/guren777/Shadowrocket/main/GuRen-NRPZ-CheLueZu
 
 [Proxy]
 # 添加本地节点。该项目的节点解析是为了兼容部分配置文件，不能当作Shadowrocket添加节点的优先选择。
