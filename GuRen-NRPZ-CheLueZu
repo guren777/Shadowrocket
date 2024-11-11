@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-10 23:35:55
+# Shadowrocket: 2024-11-11 10:08:18
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -189,7 +189,6 @@ TikTok = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩
 # ----------
 # 国外常用服务单独分流：YouTube，Netflix，Disney+，HBO，Spotify，Telegram，PayPal，Twitter，Facebook，Google，TikTok，GitHub，ChatGPT。
 # 国内常用服务单独分流：苹果服务，微软服务，哔哩哔哩，网易云音乐，游戏平台，亚马逊，百度，豆瓣，微信，抖音，新浪，知乎，小红书。
-DOMAIN-KEYWORD,metrix,BINANCE🎰
 DOMAIN-KEYWORD,bnbstatic,BINANCE🎰
 DOMAIN-KEYWORD,bntrace,BINANCE🎰
 DOMAIN-KEYWORD,binance,BINANCE🎰
@@ -210,6 +209,9 @@ DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,REJECT❌拒绝
 # BlockHttpDNS 反HTTP DNS跟踪
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,REJECT❌拒绝
+# AdvertisingLite 去广告精简版
+#RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite.list,REJECT❌拒绝
+#DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite_Domain.list,REJECT❌拒绝
 # Apple 苹果服务
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple.list,苹果服务🍎
 DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list,苹果服务🍎
@@ -290,7 +292,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT🇨🇳直连
 DOMAIN-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/China/China_Domain.list,DIRECT🇨🇳直连
 # ChinaIPs
-RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list,直连🇨🇳DIRECT
+RULE-SET,https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Shadowrocket/ChinaIPs/ChinaIPs.list,DIRECT🇨🇳直连
 # ChinaMax 国内网站/IP合集
 #DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax_Domain.list,DIRECT🇨🇳直连
 #RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMax/ChinaMax.list,DIRECT🇨🇳直连
