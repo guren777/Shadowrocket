@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-11 10:08:18
+# Shadowrocket: 2024-11-11 10:53:13
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -133,7 +133,7 @@ Binance🎰 = url-test,policy-select-name=日本3直连快,interval=300,toleranc
 美洲🌎 = url-test,policy-select-name=美国|02隧道,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(美国|🇺🇸|加拿大|🇨🇦|墨西哥|🇲🇽|巴西|🇧🇷|阿根廷|🇦🇷|智利|🇨🇱|哥伦比亚|🇨🇴|牙买加|🇯🇲|巴拉圭|🇵🇾|海地|🇭🇹)
 欧洲🇪🇺 = url-test,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(英国|🇬🇧|法国|🇫🇷|德国|🇩🇪|荷兰|🇳🇱|比利时|🇧🇪|瑞士|🇨🇭|乌克兰|🇺🇦|俄罗斯|🇷🇺|西班牙|🇪🇸|意大利|🇮🇹)
 亚洲🌏 = url-test,policy-select-name=日本|03|直连快,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=(?i)(香港|🇭🇰|台湾|taiwan|韩国|🇰🇷|日本|🇯🇵|新加坡|🇸🇬|马来西亚|🇲🇾|越南|🇻🇳|印度|🇮🇳|泰国|🇹🇭|菲律宾|🇵🇭 |土耳其|🇹🇷|以色列|🇮🇱)
-AUTO🏧自动 = url-test,policy-select-name=台湾|04奈飞CHATGPT3,interval=600,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=.*
+AUTO🏧自动 = url-test,policy-select-name=台湾|04奈飞CHATGPT3,interval=300,tolerance=100,timeout=5,url=http://www.gstatic.com/generate_204,policy-regex-filter=.*
 REJECT❌拒绝 = select,REJECT,policy-select-name=REJECT
 PROXY🪜代理 = select,AUTO🏧自动,policy-select-name=AUTO🏧自动
 DIRECT🇨🇳直连 = select,DIRECT,policy-select-name=DIRECT
@@ -142,7 +142,7 @@ Disney+ = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,�
 HBO = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 TikTok = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,interval=86400,timeout=5,select=0,url=http://www.gstatic.com/generate_204
 苹果服务🍎 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,policy-select-name=DIRECT
-谷歌服务🏳️‍🌈 = select,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,policy-select-name=PROXY
+谷歌服务🏳️‍🌈 = select,PROXY,AUTO🏧自动,美国🇺🇸,新加坡🇸🇬,韩国🇰🇷,日本🇯🇵,香港🇭🇰,台湾🌀,policy-select-name=AUTO🏧自动
 微软服务💻 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,policy-select-name=DIRECT
 游戏平台🎮 = select,DIRECT,PROXY,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,REJECT,policy-select-name=REJECT
 
@@ -220,7 +220,7 @@ DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master
 #RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Global/Global.list,PROXY🪜代理
 #DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Global/Global_Domain.list,PROXY🪜代理
 # Google
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,AUTO🏧自动
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list,谷歌服务🏳️‍🌈
 # OpenAI
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list,CHATGPT🤖
 # GitHub
