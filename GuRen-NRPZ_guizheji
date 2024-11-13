@@ -1,4 +1,4 @@
-# Shadowrocket: 2024-11-13 22:17:26
+# Shadowrocket: 2024-11-13 22:23:18
 [General]
 # Shadowrocket快速使用方法：
 # 1.首页 - 添加节点。
@@ -147,6 +147,7 @@ ChatGPT🤖 = url-test,policy-select-name=台湾|01奈飞CHATGPT2,interval=300,t
 #游戏平台🎮 = select,DIRECT,PROXY,REJECT,香港节点,台湾节点,日本节点,新加坡节点,韩国节点,美国节点,policy-select-name=REJECT
 
 [Rule]
+DOMAIN-SUFFIX,ipip.net,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
 # 规则类型：
 # DOMAIN-SUFFIX：匹配请求域名的后缀。如“DOMAIN-SUFFIX,example.com,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
 # DOMAIN-KEYWORD：匹配请求域名的关键词。如“DOMAIN-KEYWORD,exa,DIRECT”可以匹配到“a.example.com、a.b.example.com”。
@@ -198,15 +199,17 @@ DOMAIN-KEYWORD,pancakeswap,BINANCE🎰
 DOMAIN-KEYWORD,tokenpocket,BINANCE🎰
 DOMAIN-KEYWORD,bcebos,BINANCE🎰
 DOMAIN-KEYWORD,mytokenpocket,BINANCE🎰
-# Privacy 隐私保护
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
-# EasyPrivacy 隐私保护
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
-# Hijacking 反劫持
+#DNS dns污染规避，绕过审查、屏蔽广告、提升网站访问速度
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/DNS/DNS.list,𝐃𝐈𝐑𝐄𝐂𝐓🇨🇳直连
+# Hijacking 反劫持 防止DNS劫持，拦截强制重定向
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Hijacking/Hijacking.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
 # BlockHttpDNS 反HTTP DNS跟踪
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
+#EasyPrivacy 隐私保护
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/EasyPrivacy/EasyPrivacy_Domain.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
+# Privacy 隐私保护
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Privacy/Privacy_Domain.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
 # AdvertisingLite 去广告精简版
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
 DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/AdvertisingLite/AdvertisingLite_Domain.list,𝐑𝐄𝐉𝐄𝐂𝐓❌拒绝
