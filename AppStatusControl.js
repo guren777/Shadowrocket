@@ -1,7 +1,7 @@
 // 脚本名称：AppStatusControl.js
 
 // 远程白名单规则集 URL
-const whitelistUrl = "https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/Apple.list";
+const whitelistUrl = "https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/NetworkFirewall-Whitelist.list";
 
 // 本地存储键值
 const appStatusKey = "App_Status"; // 存储当前应用状态（foreground/background）
