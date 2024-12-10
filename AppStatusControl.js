@@ -1,7 +1,7 @@
 // 脚本名称：AppStatusControl.js
 
 // 远程白名单规则集 URL
-const whitelistUrl = "https://your-server.com/whitelist.txt";
+const whitelistUrl = "https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/Apple.list";
 
 // 本地存储键值
 const appStatusKey = "App_Status"; // 存储当前应用状态（foreground/background）
@@ -65,6 +65,7 @@ if (typeof $request === "undefined") {
 }
 
 // 远程白名单更新函数
+
 async function fetchWhitelist() {
     try {
         const response = await new Promise((resolve, reject) => {
@@ -77,8 +78,12 @@ async function fetchWhitelist() {
             });
         });
 
-        // 解析域名列表
-        const domains = response.split("\n").map(line => line.trim()).filter(line => line && !line.startsWith("#"));
+        // 解析域名列表，忽略空行和注释行
+        const domains = response
+            .split("\n")                     // 按行分割
+            .map(line => line.trim())        // 去除行首尾空白字符
+            .filter(line => line && !line.startsWith("#")); // 过滤空行和注释行
+
         console.log(`远程白名单更新成功：${domains.length} 条规则`);
         return domains;
     } catch (err) {
