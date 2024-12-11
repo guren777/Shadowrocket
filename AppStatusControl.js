@@ -12,27 +12,35 @@ const enableWhitelistUpdateNotification = true; // 启用/禁用白名单更新�
 const enableRequestPassNotification = false; // 启用/禁用请求放行的通知
 const enableRequestBlockNotification = true; // 启用/禁用请求拦截的通知
 const enableErrorNotification = true; // 启用/禁用错误通知
+const enableNetworkStatusNotification = false; // 启用/禁用网络状态检测的通知
 
-// ** 网络状态检测函数 **
+// ** 网络状态检测函数（增强版） **
 async function getNetworkStatus() {
     const network = $network;
     console.log(`网络状态详情：${JSON.stringify(network)}`);
 
-    if (network && network.v4 && network.v4.primaryAddress) {
-        if (network.wifi) return "Wi-Fi连接";
-        if (network.cellular) return "蜂窝网络连接";
-    }
+    if (network && network.wifi && network.wifi.ssid) {
+        const ssid = network.wifi.ssid;
 
-    // 备用逻辑：通过 HTTP 请求测试网络连接
-    try {
-        const testUrl = "https://www.google.com";
-        const result = await new Promise((resolve) => {
-            $httpClient.get(testUrl, (err, resp) => {
-                resolve(!err && resp.status === 200 ? "已连接" : "无网络连接");
-            });
-        });
-        return result === "已连接" ? "未知网络连接" : "无网络连接";
-    } catch (e) {
+        // 检查是否是有效的 Wi-Fi 名称
+        if (ssid === "FAKE-SSID" || ssid === "") {
+            console.log("Wi-Fi 名称无效（可能未开启定位权限）");
+            if (enableNetworkStatusNotification && enableErrorNotification) {
+                $notification.post("网络状态检测", "Wi-Fi 名称无效", "请检查是否启用定位权限");
+            }
+            return "Wi-Fi连接（未知网络）";
+        }
+
+        console.log(`Wi-Fi 网络：${ssid}`);
+        return `Wi-Fi连接（${ssid}）`;
+    } else if (network && network.cellular) {
+        console.log("蜂窝网络连接");
+        return "蜂窝网络连接";
+    } else {
+        console.log("网络状态未知");
+        if (enableNetworkStatusNotification && enableErrorNotification) {
+            $notification.post("网络状态检测", "网络状态未知", "请检查您的网络连接");
+        }
         return "无网络连接";
     }
 }
