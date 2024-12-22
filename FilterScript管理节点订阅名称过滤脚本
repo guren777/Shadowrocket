@@ -1,24 +1,18 @@
-/*
-# @ScriptName        shadow rocket管理节点名称过滤脚本
-# @Author            @weekin
-# @Tg                https://t.me/weekin 💡
-# @UpdateTime        2024/10/20 12:16 UTC/GMT +8
-# @Function          自动为服务器节点添加国家或地区标识符，支持中英文输出，并通过自定义前缀和后缀重命名节点。同时，过滤无效关键词，保留必要信息，确保节点名称唯一且简洁等  
-# @howtouse          首页订阅后面ⓘ - 过滤，将文本内容全部复制，粘贴到输入框，保存即可
-# @ScriptUrl         https://raw.githubusercontent.com/kiwi707/Shadow-Rocket/refs/heads/main/FilterScript
-*/
+$server.reserved="1,40-60,30-50"
+
+
 let customCharStart = "➥"; //添加前缀，删除引号内的内容即不添加前缀
-let customCharEnd = "ᵐᵗ"; //添加后缀，删除引号中的内容即不添加后缀
+let customCharEnd = ""; //添加后缀，删除引号中的内容即不添加后缀
 
 // 配置：输出语言选项，CN为中文名称，EN为英文名称，默认输出英文
-const outputLanguage = "EN"; // 选择 "CN" 或 "EN"
+const outputLanguage = "CN"; // 选择 "CN" 或 "EN"
 
 // 国家和地区与标识符的映射（包括中文和英文名）
 const keywordsToNames = {
     "美国|美國|US|洛杉矶|洛杉磯|西雅图|纽约|芝加哥|Atlanta|States|American|Los Angeles|Seattle|New York|Chicago": outputLanguage === "EN" ? "🇺🇸US" : "🇺🇸美国",
     "港|香港|HK|Hong Kong": outputLanguage === "EN" ? "🇭🇰HK" : "🇭🇰香港",
     "新加坡|狮城|SG|Singapore": outputLanguage === "EN" ? "🇸🇬SG" : "🇸🇬新加坡",
-    "台|台湾|台北|高雄|TW|Taiwan|Taipei|Kaohsiung": outputLanguage === "EN" ? "🇨🇳TW" : "🇨🇳台湾",
+    "台|台湾|台北|高雄|TW|Taiwan|Taipei|Kaohsiung": outputLanguage === "EN" ? "🌀TW" : "🌀台湾",
     "日|东京|大阪|名古屋|JP|Tokyo|Japan|Osaka|Nagoya": outputLanguage === "EN" ? "🇯🇵JP" : "🇯🇵日本",
     "韩国|首尔|釜山|KR|Korea|Seoul|Busan": outputLanguage === "EN" ? "🇰🇷KR" : "🇰🇷韩国",
     "土耳其|伊斯坦布尔|安卡拉|TR|Turkey|Istanbul|Ankara": outputLanguage === "EN" ? "🇹🇷TR" : "🇹🇷土耳其",
@@ -94,7 +88,7 @@ const filterKeywords = [
 
 // 定义保留的关键词及其替换词
 const keywordsMap = {
-    "ChatGPT": "GPT",
+    "ChatGPT": "ChatGPT", "Netflix": "Netflix", "奈飞": "奈飞",
     "保留的关键词2": "替换词2" //如果仅保留一些功能性的关键词，可以在这里添加，前后一致即可。如果想把保留的关键词换成其他词，按照示例更改
 };
 
