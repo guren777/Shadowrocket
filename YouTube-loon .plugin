@@ -25,16 +25,16 @@ AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
 
 [URL Rewrite]
-# 屏蔽广告请求并返回空白图片（Surge 风格）
+# 返回空白图片，避免加载广告卡顿（可选增强）
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad _ REJECT-IMG
 
 [Script]
-# 处理 YouTube 响应，屏蔽上传按钮、选段按钮和翻译功能
+# 修改 YouTube 响应内容，屏蔽功能按钮、设置翻译等
 http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
-
-[Rewrite]
-# mock 空白响应（Loon 语法下对应 Surge 的 Map Local）
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
+
+[mock-response-body]
+# 对广告视频请求返回空白响应，彻底屏蔽
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text status-code=502
