@@ -1,21 +1,45 @@
 #!name=𝐌𝐮𝐥𝐭𝐢𝐒𝐞𝐚𝐫𝐜𝐡🔍多重搜索
-#!desc=输入快捷前缀跳转多平台搜索，如：gh+ChatGPT 跳转 GitHub
-#!author=deezertidal
+#!desc= 输入关键词自动跳转多平台搜索（如：gh+关键词 => GitHub 搜索）
+#!author=deezertidal（整理注释：ChatGPT）
 #!homepage=
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/multisearch.png
 
 [Rewrite]
+
+# wk+关键词 => 维基百科搜索
 ^https:\/\/www\.google\.com\/search\?q=wk(\+|%20)([^&]+).+ https://zh.wikipedia.org/wiki/$2 302
+
+# bd+关键词 => 百度搜索
 ^https:\/\/www\.google\.com\/search\?q=bd(\+|%20)([^&]+).+ https://www.baidu.com/s?wd=$2 302
+
+# gh+关键词 => GitHub 搜索
 ^https:\/\/www\.google\.com\/search\?q=gh(\+|%20)([^&]+).+ https://github.com/search?q=$2 302
+
+# gi+关键词 => Google 图片搜索
 ^https:\/\/www\.google\.com\/search\?q=gi(\+|%20)([^&]+).+ https://www.google.com/search?&tbm=isch&q=$2 302
+
+# yd+关键词 => 有道词典
 ^https:\/\/www\.google\.com\/search\?q=yd(\+|%20)([^&]+).+ https://dict.youdao.com/search?q=$2 302
+
+# trc+关键词 => 自动翻译成中文（Google Translate）
 ^https:\/\/www\.google\.com\/search\?q=trc(\+|%20)([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=zh-CN&text=$2 302
+
+# tre+关键词 => 自动翻译成英文
 ^https:\/\/www\.google\.com\/search\?q=tre(\+|%20)([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$2 302
+
+# db+关键词 => 豆瓣搜索
 ^https:\/\/www\.google\.com\/search\?q=db(\+|%20)([^&]+).+ https://www.douban.com/search?q=$2 302
+
+# zh+关键词 => 知乎搜索
 ^https:\/\/www\.google\.com\/search\?q=zh(\+|%20)([^&]+).+ https://www.zhihu.com/search?q=$2 302
+
+# wb+关键词 => 微博搜索
 ^https:\/\/www\.google\.com\/search\?q=wb(\+|%20)([^&]+).+ https://s.weibo.com/weibo/$2 302
+
+# ddg+关键词 => DuckDuckGo 搜索
 ^https:\/\/www\.google\.com\/search\?q=ddg(\+|%20)([^&]+).+ https://duckduckgo.com/?ia=about&q=$2 302
+
+# bi+关键词 => Bing 搜索
 ^https:\/\/www\.google\.com\/search\?q=bi(\+|%20)([^&]+).+ http://www.bing.com/search?q=$2 302
 
 [MITM]
