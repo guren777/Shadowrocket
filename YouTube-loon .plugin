@@ -41,7 +41,7 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 #   - blockUpload: 是否屏蔽上传按钮（true/false）
 #   - blockImmersive: 是否屏蔽选段按钮（true/false）
 #   - debug: 是否启用调试模式（true/false）
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
