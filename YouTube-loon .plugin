@@ -1,5 +1,5 @@
 #!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
-#!desc= Youtube & Youtube Music 去广告/画中画/后台播放
+#!desc= 去除 YouTube 和 YouTube Music 的广告，支持画中画和后台播放功能
 #!author= deezertidal
 #!icon= https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
 #!homepage=
@@ -25,16 +25,17 @@ AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
 AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
 
 [URL Rewrite]
-# 返回空白图片，避免加载广告卡顿（可选增强）
+# 屏蔽广告请求并返回空白图片
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad _ REJECT-IMG
 
 [Script]
-# 修改 YouTube 响应内容，屏蔽功能按钮、设置翻译等
+# 处理 YouTube 响应，屏蔽上传按钮、选段按钮和翻译功能
 http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
 
-[MITM]
-hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
+[Map Local]
+# 屏蔽广告请求并返回空白数据，避免界面显示异常
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
-[mock-response-body]
-# 对广告视频请求返回空白响应，彻底屏蔽
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text status-code=502
+[MITM]
+# 启用 HTTPS 流量的中间人代理，拦截 *.googlevideo.com 和 youtubei.googleapis.com 的流量
+hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
