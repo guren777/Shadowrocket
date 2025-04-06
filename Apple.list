@@ -1,4 +1,4 @@
-# This ruleset includes 99% of apple inc network connections(global). If there are any missing, please PR.
+# This ruleset includes 99% of apple incnetwork connections(global). If there are any missing, please PR.
 
 DOMAIN-SUFFIX,apple.co
 DOMAIN-SUFFIX,apple.cn
