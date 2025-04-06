@@ -9,7 +9,7 @@
 #!loon_version= 3.2.1(372)
 
 #!arguments=屏蔽上传按钮:true,屏蔽选段按钮:true,字幕翻译语言:zh-Hans,歌词翻译语言:zh-Hans,脚本执行引擎:auto,启用调试模式:false
-#!arguments-desc=- 屏蔽参数：[true, false]\n- 翻译参数：[语言代码, off]\n- 脚本引擎：[auto, jsc, webview]\n\n1. 语言代码遵循 Google Translate Languages Codes，当填入 off 时关闭翻译\n2. 推荐使用 jsc 引擎，但您仍可以切换成 webview 体验 Surge 新特性\n3. 开启调试模式用于输出更多日志
+#!arguments-desc=- 屏蔽参数：[true, false]\n- 翻译参数：[语言代码, off]\n- 脚本引擎：[auto, jsc, webview]\n\n1. 语言代码遵循 Google Translate Languages Codes，当填入 off 时关闭翻译\n2. 推荐使用 jsc 引擎，但您仍可以切换成 webview 体验 Surge/Loon 新特性\n3. 开启调试模式用于输出更多日志
 
 [Argument]
 屏蔽上传按钮 = switch, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
@@ -20,22 +20,28 @@
 启用调试模式 = switch, false, tag=启用调试模式, desc=是否启用调试模式以输出更多日志
 
 [Rule]
-# 屏蔽 UDP 协议下的 googlevideo.com 和 youtubei.googleapis.com 请求
-AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT
-AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT
+# 1. 屏蔽 UDP 协议下的 googlevideo.com 请求
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+# 2. 屏蔽 UDP 协议下的 youtubei.googleapis.com 请求
+AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
 [URL Rewrite]
-# 返回空白图片，避免加载广告卡顿（可选增强）
+# 将匹配到的 googlevideo.com initplayback 请求返回占位空白图片，以避免广告显示问题
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad _ REJECT-IMG
 
 [mock-response-body]
-# 对广告视频请求返回空白响应，彻底屏蔽
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text, status-code=502, response-body=""
+# 对匹配到的广告请求返回空白数据，避免广告界面显示异常
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-# 修改 YouTube 响应内容，屏蔽功能按钮、设置翻译等
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
+# 处理 YouTube 响应，屏蔽上传按钮、选段按钮和翻译功能
+# 参数说明：
+#   - lyricLang: 歌词翻译语言
+#   - captionLang: 字幕翻译语言
+#   - blockUpload: 是否屏蔽上传按钮（true/false）
+#   - blockImmersive: 是否屏蔽选段按钮（true/false）
+#   - debug: 是否启用调试模式（true/false）
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
-
