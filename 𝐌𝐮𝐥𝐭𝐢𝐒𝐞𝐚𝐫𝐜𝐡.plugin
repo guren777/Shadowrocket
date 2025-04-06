@@ -1,5 +1,6 @@
 #!name=𝐌𝐮𝐥𝐭𝐢𝐒𝐞𝐚𝐫𝐜𝐡🔍多重搜索
 #!desc= 输入关键词自动跳转多平台搜索（如：gh+关键词 => GitHub 搜索）
+wk+关键词 => 维基百科搜索
 #!author=deezertidal（整理注释：ChatGPT）
 #!homepage=
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/multisearch.png
