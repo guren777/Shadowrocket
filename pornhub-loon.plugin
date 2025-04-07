@@ -1,0 +1,20 @@
+#!name= 𝐩𝐨𝐫𝐧𝐡𝐮𝐛🔞🚫ɢʀ版
+#!desc= pornhub去广告
+#!author= 不告诉你（整理注释：ChatGPT）
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/pornhub.plugin
+#!icon=
+#!date=
+
+[Rewrite]
+^https:\/\/(cn|www)\.pornhub\.com\/service-worker.js reject-dict
+
+#-------------------------------------------
+
+^https?:\/\/(cn|www)\.pornhub\.com\/(?!view_video\.php\?viewkey=.*|model.*|interstitial(\?viewkey=.*)?|categories.*|video.*|gifs.*|gif\/.*.*|popularwithwomen.*|channels.*|playlists.*|album.*|albums\/.*.*|community.*|community\/.*.*|pornstars.*|pornstar\/.*|shorties.*|photo.*|$).*$ reject
+
+[MITM]
+hostname = *.pornhub.com
