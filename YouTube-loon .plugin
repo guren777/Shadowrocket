@@ -1,7 +1,7 @@
 #!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
 #!desc=移除YouTube视频、瀑布流、搜索和Shorts中的广告，移除底栏的Shorts按钮和上传按钮，增加画中画及字幕翻译功能。移除YouTube Music底栏的上传、选段和升级按钮，增加歌词翻译，支持二者的后台播放。此插件需要启用MitM over HTTP/2和QUIC回退保护。支持Premium订阅用户使用，不支持tvOS设备。
 #App链接=https://apps.apple.com/app/id544007664
-#!author=Maasea[https://github.com/Maasea],VirgilClyne[https://github.com/VirgilClyne],Choler[https://github.com/Choler],DivineEngine[https://github.com/DivineEngine],app2smile[https://github.com/Moli-X/Tool/blob/X/Loon/Readme.md]
+#!author=Maasea[ChatGPT]
 #!tag=去广告
 #!system=iOS,iPadOS,macOS
 #!system_version=15
