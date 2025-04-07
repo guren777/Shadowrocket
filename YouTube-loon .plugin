@@ -1,29 +1,29 @@
-#!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版  
-#!desc= Youtube & Youtube Music 去广告/画中画/后台播放；支持快捷关键词跳转  
-#!author= deezertidal  
-#!icon= https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png  
-#!tag= YouTube去广告  
-#!system= iOS  
-#!system_version= 15.0  
+#!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
+#!desc= Youtube & Youtube Music 去广告/画中画/后台播放；支持快捷关键词跳转等功能
+#!author= deezertidal
+#!icon= https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
+#!tag= YouTube去广告
+#!system= iOS
+#!system_version= 15.0
 #!loon_version= 3.2.1(372)
 
-#!arguments=屏蔽上传按钮:false,屏蔽选段按钮:false,字幕翻译语言:zh-Hans,歌词翻译语言:zh-Hans,脚本执行引擎:auto,启用调试模式:false  
-#!arguments-desc=  
-- 开关参数：true 或 false  
-- 语言参数：如 zh-Hans（简体中文），或填 off 关闭翻译  
-- 脚本引擎：auto, jsc, webview  
-- 建议：使用 jsc；调试可开启 debug
+#!arguments=blockUpload:false,blockImmersive:false,captionLang:zh-Hans,lyricLang:zh-Hans,engine:auto,debug:false
+#!arguments-desc=
+- blockUpload / blockImmersive: 是否屏蔽按钮（true / false）
+- captionLang / lyricLang: 翻译语言（如 zh-Hans / off）
+- engine: 脚本执行引擎（auto / jsc / webview）
+- debug: 是否启用调试日志（true / false）
 
 [Argument]
-屏蔽上传按钮 = switch, false, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
-屏蔽选段按钮 = switch, false, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
-字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译目标语言
-歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译目标语言
-脚本执行引擎 = select, auto, jsc, webview, default=auto, tag=脚本执行引擎, desc=选择脚本执行引擎
-启用调试模式 = switch, false, tag=启用调试模式, desc=是否开启调试模式
+blockUpload = switch, false, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
+blockImmersive = switch, false, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
+captionLang = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译的目标语言（如 zh-Hans，或 off 关闭）
+lyricLang = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译的目标语言（如 zh-Hans，或 off 关闭）
+engine = select, auto, jsc, webview, default=auto, tag=脚本执行引擎, desc=选择脚本执行引擎
+debug = switch, false, tag=启用调试模式, desc=是否启用调试模式以输出更多日志
 
 [Rule]
-AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT  
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
 AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
 [URL Rewrite]
@@ -33,7 +33,7 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/main/youtube.response.preview.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/main/youtube.response.preview.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"blockUpload":"{blockUpload}","blockImmersive":"{blockImmersive}","captionLang":"{captionLang}","lyricLang":"{lyricLang}","debug":"{debug}"}
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
