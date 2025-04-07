@@ -17,12 +17,11 @@
 - debug: 是否启用调试日志 [true, false]
 
 [Argument]
-blockUpload = select, false, true, tag=blockUpload, desc=是否屏蔽上传按钮
-blockImmersive = select, false, true, tag=blockImmersive, desc=是否屏蔽选段按钮
-captionLang = input, zh-Hans, tag=captionLang, desc=设置字幕翻译目标语言
-lyricLang = input, zh-Hans, tag=lyricLang, desc=设置歌词翻译目标语言
-engine = select, auto, jsc, webview, tag=engine, desc=选择脚本执行引擎
-debug = select, false, true, tag=debug, desc=是否启用调试模式
+屏蔽上传按钮 = select, false, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
+屏蔽选段按钮 = select, false, true, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
+字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译语言（或填写 off 关闭）
+歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译语言（或填写 off 关闭）
+启用调试模式 = select, false, true, tag=启用调试模式, desc=是否启用调试模式
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
@@ -35,7 +34,9 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/Kele-dao/Youtube-Adblock/main/youtube.response.js, requires-body=true, binary-body-mode=true, timeout=10, tag=YouTubeAdblock, argument={"blockUpload":"{blockUpload}","blockImmersive":"{blockImmersive}","captionLang":"{captionLang}","lyricLang":"{lyricLang}","debug":"{debug}"}
-
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) \
+script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, \
+requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, \
+argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
