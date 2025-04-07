@@ -9,14 +9,14 @@
 #!loon_version= 3.2.1(372)
 
 #!arguments=屏蔽上传按钮:true,屏蔽选段按钮:true,字幕翻译语言:zh-Hans,歌词翻译语言:zh-Hans,脚本执行引擎:auto,启用调试模式:false
-#!arguments-desc=- 屏蔽参数：[true, false]\n- 翻译参数：[语言代码, off]\n- 脚本引擎：[auto, jsc, webview]\n\n1. 语言代码遵循 Google Translate Languages Codes, 当填入 off 时关闭翻译\n2. 推荐使用 jsc 引擎，但您仍可以切换成 webview 体验 Surge/Loon 新特性\n3. 开启调试模式用于输出更多日志
+#!arguments-desc=- 屏蔽参数：[true, false]\n- 翻译参数：[语言代码, off]\n- 脚本引擎：[auto, jsc, webview]\n\n1. 语言代码遵循 Google Translate Languages Codes，当填入 off 时关闭翻译\n2. 推荐使用 jsc 引擎，但您仍可以切换成 webview 体验 Surge/Loon 新特性\n3. 开启调试模式用于输出更多日志
 
 [Argument]
 屏蔽上传按钮 = switch, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
 屏蔽选段按钮 = switch, true, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
-字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译的目标语言
-歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译的目标语言
-脚本执行引擎 = select, auto, jsc, webview, tag=脚本执行引擎, desc=选择脚本执行引擎
+字幕翻译语言 = input, "zh-Hans", tag=字幕翻译语言, desc=设置字幕翻译的目标语言
+歌词翻译语言 = input, "zh-Hans", tag=歌词翻译语言, desc=设置歌词翻译的目标语言
+脚本执行引擎 = select, "auto", "jsc", "webview", tag=脚本执行引擎, desc=选择脚本执行引擎
 启用调试模式 = switch, false, tag=启用调试模式, desc=是否启用调试模式以输出更多日志
 
 [Rule]
@@ -36,11 +36,11 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 [Script]
 # 处理 YouTube 响应，屏蔽上传按钮、选段按钮和翻译功能
 # 参数说明：
-#   - 歌词翻译语言：用于设置歌词翻译目标语言
-#   - 字幕翻译语言：用于设置字幕翻译目标语言
-#   - 屏蔽上传按钮：是否隐藏上传按钮（true/false）
-#   - 屏蔽选段按钮：是否隐藏选段按钮（true/false）
-#   - 启用调试模式：是否输出更多日志（true/false）
+#   - lyricLang: 歌词翻译语言
+#   - captionLang: 字幕翻译语言
+#   - blockUpload: 是否屏蔽上传按钮（true/false）
+#   - blockImmersive: 是否屏蔽选段按钮（true/false）
+#   - debug: 是否启用调试模式（true/false）
 http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"lyricLang":"{歌词翻译语言}","captionLang":"{字幕翻译语言}","blockUpload":{屏蔽上传按钮},"blockImmersive":{屏蔽选段按钮},"debug":{启用调试模式}}
 
 [MITM]
