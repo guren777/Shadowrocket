@@ -1,13 +1,13 @@
 #!name= 𝐩𝐨𝐫𝐧𝐡𝐮𝐛🔞🚫ɢʀ版
 #!desc= pornhub去广告
-#!author= 不告诉你（整理注释：ChatGPT）
+#!author= 不告诉你（整理注释：就不告诉你）
 #!tag=去广告
 #!system=
 #!system_version=
-#!loon_version=
+#!loon_version=3.2.4(787)
 #!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/pornhub-loon.plugin
-#!icon=
-#!date=
+#!icon=https://en.wikipedia.org/wiki/File:Logo_of_Pornhub.png
+#!date=2024-12-24 01:16:46
 
 [Rewrite]
 ^https:\/\/(cn|www)\.pornhub\.com\/service-worker.js reject-dict
