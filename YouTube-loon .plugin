@@ -1,27 +1,18 @@
-#!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
-#!desc=去除 YouTube 广告，支持后台播放、画中画、翻译、隐藏上传按钮/选段按钮
-#!author=Kele
+#!name=YouTube去广告增强版
+#!desc=去广告/后台播放/自定义功能开关
+#!author=deezertidal
 #!icon=https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
 #!tag=YouTube去广告
 #!system=iOS
 #!system_version=15.0
 #!loon_version=3.2.1(372)
 
-#!arguments=blockUpload:false,blockImmersive:false,captionLang:zh-Hans,lyricLang:zh-Hans,engine:auto,debug:false
-#!arguments-desc=
-- blockUpload: 是否屏蔽上传按钮 [true, false]
-- blockImmersive: 是否屏蔽选段按钮 [true, false]
-- captionLang: 字幕翻译语言，如 zh-Hans、en 等（或填 off 关闭）
-- lyricLang: 歌词翻译语言，如 zh-Hans、ja 等（或填 off 关闭）
-- engine: 脚本引擎 [auto, jsc, webview]
-- debug: 是否启用调试日志 [true, false]
-
 [Argument]
 屏蔽上传按钮 = select, false, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
 屏蔽选段按钮 = select, false, true, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
-字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译语言（或填写 off 关闭）
-歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译语言（或填写 off 关闭）
-启用调试模式 = select, false, true, tag=启用调试模式, desc=是否启用调试模式
+字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译的目标语言（如 off 为关闭）
+歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译的目标语言（如 off 为关闭）
+启用调试模式 = select, false, true, tag=启用调试模式, desc=是否启用调试模式输出日志
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
@@ -38,5 +29,6 @@ http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|p
 script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, \
 requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, \
 argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
+
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
