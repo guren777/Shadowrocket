@@ -12,8 +12,8 @@
 #!arguments-desc=- 屏蔽参数：[true, false]\n- 翻译参数：[语言代码, off]\n- 脚本引擎：[auto, jsc, webview]\n\n1. 语言代码遵循 Google Translate Languages Codes，当填入 off 时关闭翻译\n2. 推荐使用 jsc 引擎，但您仍可以切换成 webview 体验 Surge/Loon 新特性\n3. 开启调试模式用于输出更多日志
 
 [Argument]
-屏蔽上传按钮 = switch, false, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
-屏蔽选段按钮 = switch, false, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
+屏蔽上传按钮 = select, false, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
+屏蔽选段按钮 = select, false, true, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
 字幕翻译语言 = input, "zh-Hans", tag=字幕翻译语言, desc=设置字幕翻译的目标语言
 歌词翻译语言 = input, "zh-Hans", tag=歌词翻译语言, desc=设置歌词翻译的目标语言
 脚本执行引擎 = select, "auto", "jsc", "webview", tag=脚本执行引擎, desc=选择脚本执行引擎
