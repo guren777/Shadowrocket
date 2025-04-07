@@ -6,8 +6,8 @@
 #!system_version=
 #!loon_version=3.2.4(787)
 #!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/pornhub-loon.plugin
-#!icon=https://en.wikipedia.org/wiki/File:Logo_of_Pornhub.png
-#!date=2024-12-24 01:16:46
+#!icon=https://upload.wikimedia.org/wikipedia/commons/7/7c/Logo_of_Pornhub.png
+#!date=
 
 [Rewrite]
 ^https:\/\/(cn|www)\.pornhub\.com\/service-worker.js reject-dict
