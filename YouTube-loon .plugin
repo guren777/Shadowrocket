@@ -1,34 +1,32 @@
-#!name=YouTube去广告增强版
-#!desc=去广告/后台播放/自定义功能开关
-#!author=deezertidal
+#!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
+#!desc=移除YouTube视频、瀑布流、搜索和Shorts中的广告，移除底栏的Shorts按钮和上传按钮，增加画中画及字幕翻译功能。移除YouTube Music底栏的上传、选段和升级按钮，增加歌词翻译，支持二者的后台播放。此插件需要启用MitM over HTTP/2和QUIC回退保护。支持Premium订阅用户使用，不支持tvOS设备。
+#App链接=https://apps.apple.com/app/id544007664
+#!author=Maasea[https://github.com/Maasea],VirgilClyne[https://github.com/VirgilClyne],Choler[https://github.com/Choler],DivineEngine[https://github.com/DivineEngine],app2smile[https://github.com/Moli-X/Tool/blob/X/Loon/Readme.md]
+#!tag=去广告
+#!system=iOS,iPadOS,macOS
+#!system_version=15
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/Moli-X/Tool/raw/X/Loon/Plugin/Kelee/YouTube_remove_ads.plugin
 #!icon=https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
-#!tag=YouTube去广告
-#!system=iOS
-#!system_version=15.0
-#!loon_version=3.2.1(372)
+#!date=2025-03-30 17:34:38
 
 [Argument]
-屏蔽上传按钮 = select, false, true, tag=屏蔽上传按钮, desc=是否屏蔽 YouTube 上传按钮
-屏蔽选段按钮 = select, false, true, tag=屏蔽选段按钮, desc=是否屏蔽 YouTube 选段按钮
-字幕翻译语言 = input, zh-Hans, tag=字幕翻译语言, desc=设置字幕翻译的目标语言（如 off 为关闭）
-歌词翻译语言 = input, zh-Hans, tag=歌词翻译语言, desc=设置歌词翻译的目标语言（如 off 为关闭）
-启用调试模式 = select, false, true, tag=启用调试模式, desc=是否启用调试模式输出日志
+blockUpload=switch,false,true,tag=隐藏上传按钮,desc=用于隐藏YouTube底栏的上传按钮
+blockShorts=switch,false,true,tag=隐藏Shorts按钮,desc=用于隐藏YouTube底栏的Shorts按钮
+blockImmersive=switch,false,true,tag=隐藏选段按钮,desc=用于隐藏YouTube Music底栏的选段按钮
+captionLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=字幕翻译语言,desc=需要把YouTube字幕翻译翻译为何种语言
+lyricLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=歌词翻译语言,desc=需要把YouTube Music字幕翻译翻译为何种语言
+debug=switch,false,true,tag=启用调试模式,desc=此插件的调试模式
 
 [Rule]
-AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
-AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,QUIC)),REJECT
+AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,QUIC)),REJECT
 
-[URL Rewrite]
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad _ REJECT-IMG
-
-[mock-response-body]
+[Rewrite]
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) \
-script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.preview.js, \
-requires-body=true, binary-body-mode=true, timeout=10, tag=YouTube_Response_Modification, \
-argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.js,requires-body=true,binary-body-mode=true,argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}],tag=YouTube去广告
 
-[MITM]
-hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
+[MitM]
+hostname=*.googlevideo.com,youtubei.googleapis.com
