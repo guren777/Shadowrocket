@@ -26,7 +26,7 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/response.preview.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/YouTube.response.js,requires-body=true,binary-body-mode=true,timeout=10,tag=YouTube_Response_Modification,argument={"blockUpload":"{屏蔽上传按钮}","blockImmersive":"{屏蔽选段按钮}","captionLang":"{字幕翻译语言}","lyricLang":"{歌词翻译语言}","debug":"{启用调试模式}"}
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
