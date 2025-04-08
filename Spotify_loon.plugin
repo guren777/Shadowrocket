@@ -1,11 +1,11 @@
 #!name= 𝐒𝐩𝐨𝐭𝐢𝐟𝐲🔓♛🚫ɢʀ版
 #!desc=过滤Spotify播放广告，移除随机播放，恢复歌手和专辑列表的正常展示。建议重新登录并清除缓存，且音质不能设置为超高，仅建议iOS 15及以上设备使用。
 #App链接=
-#!author=[ChatGPT]
+#!author=X[ChatGPT]
 #!tag=去广告
-#!system=
-#!system_version=
-#!loon_version=3.2.4(787)
+#!system=ios
+#!system_version=X
+#!loon_version=X
 #!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/Spotify_loon.plugin
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
 #!date=2024-12-24 01:16:46
