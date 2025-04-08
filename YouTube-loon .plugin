@@ -1,11 +1,11 @@
 #!name= 𝐘𝐨𝐮𝐓𝐮𝐛𝐞🚫/⿻/▶︎ɢʀ版
 #!desc=移除YouTube视频、瀑布流、搜索和Shorts中的广告，移除底栏的Shorts按钮和上传按钮，增加画中画及字幕翻译功能。移除YouTube Music底栏的上传、选段和升级按钮，增加歌词翻译，支持二者的后台播放。此插件需要启用MitM over HTTP/2和QUIC回退保护。支持Premium订阅用户使用，不支持tvOS设备。
-#App链接=https://apps.apple.com
+#App链接=https://apps.apple.com/app/id544007664
 #!author=[ChatGPT]
 #!tag=去广告
 #!system=iOS,iPadOS,macOS
-#!system_version=15
-#!loon_version=3.2.4(787)
+#!system_version=
+#!loon_version=
 #!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/YouTube-loon%20.plugin
 #!icon=https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
 #!date=2025-03-30 17:34:38
@@ -16,6 +16,7 @@ blockShorts=switch,false,true,tag=隐藏Shorts按钮,desc=用于隐藏YouTube底
 blockImmersive=switch,false,true,tag=隐藏选段按钮,desc=用于隐藏YouTube Music底栏的选段按钮
 captionLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=字幕翻译语言,desc=需要把YouTube字幕翻译翻译为何种语言
 lyricLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=歌词翻译语言,desc=需要把YouTube Music字幕翻译翻译为何种语言
+engine = select, auto, jsc, webview, tag=脚本执行引擎, desc=现在脚本执行环境
 debug=switch,false,true,tag=启用调试模式,desc=此插件的调试模式
 
 [Rule]
@@ -26,7 +27,7 @@ AND,((DOMAIN-SUFFIX,youtubei.googleapis.com),(PROTOCOL,QUIC)),REJECT
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad mock-response-body data-type=text status-code=502
 
 [Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.js,requires-body=true,binary-body-mode=true,argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}],tag=YouTube去广告
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/youtube.response.js,requires-body=true,binary-body-mode=true,argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{engine},{debug}],tag=YouTube去广告
 
 [MitM]
 hostname=*.googlevideo.com,youtubei.googleapis.com
