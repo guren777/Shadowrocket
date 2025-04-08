@@ -4,8 +4,8 @@
 #!author=[ChatGPT]
 #!tag=去广告
 #!system=iOS,iPadOS,macOS
-#!system_version=
-#!loon_version=
+#!system_version=15
+#!loon_version=3.2.4(787)
 #!homepage=https://raw.githubusercontent.com/guren777/Shadowrocket/refs/heads/main/YouTube-loon%20.plugin
 #!icon=https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png
 #!date=2025-03-30 17:34:38
@@ -16,7 +16,7 @@ blockShorts=switch,false,true,tag=隐藏Shorts按钮,desc=用于隐藏YouTube底
 blockImmersive=switch,false,true,tag=隐藏选段按钮,desc=用于隐藏YouTube Music底栏的选段按钮
 captionLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=字幕翻译语言,desc=需要把YouTube字幕翻译翻译为何种语言
 lyricLang=select,"zh-Hans","zh-Hant","ja","ko","en","off",tag=歌词翻译语言,desc=需要把YouTube Music字幕翻译翻译为何种语言
-engine = select, auto, jsc, webview, tag=脚本执行引擎, desc=现在脚本执行环境
+engine = select, "auto", "jsc", "webview", tag=脚本执行引擎, desc=现在脚本执行环境
 debug=switch,false,true,tag=启用调试模式,desc=此插件的调试模式
 
 [Rule]
