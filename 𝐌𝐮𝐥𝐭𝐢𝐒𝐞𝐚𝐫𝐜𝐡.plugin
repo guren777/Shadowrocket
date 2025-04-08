@@ -1,7 +1,7 @@
 #!name=𝐌𝐮𝐥𝐭𝐢𝐒𝐞𝐚𝐫𝐜𝐡🔍多重搜索
 #!desc= 1. wk+关键词 => 维基百科，2. bd+关键词 => 百度搜索  3. gh+关键词 => GitHub 搜索  4. gi+关键词 => Google 图片  5. yd+关键词 => 有道词典  6. trc+关键词 => 自动翻译成中文  7. tre+关键词 => 自动翻译成英文  8. db+关键词 => 豆瓣搜索  9. zh+关键词 => 知乎搜索  10. wb+关键词 => 微博搜索  11. ddg+关键词 => DuckDuckGo  12. bi+关键词 => Bing 搜索  
 
-#!author=deezertidal（整理注释：ChatGPT）
+#!author=X（整理注释：ChatGPT）
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/multisearch.png
 
 [Rewrite]
