@@ -1,54 +1,32 @@
-// 百度广告过滤脚本
-const blockedDomains = [
-  "adservice.baidu.com",
-  "track.baidu.com",
-  "adlog.baidu.com",
+const adPattern = /baidu\.com.*(adservice|cpro|ads|ssp|track|log|hm|adx|baijiahao|monitor|vstat)/;
+const jsBlockList = [
+  "baidu.com/ads.",
+  "baidu.com/cpro",
   "cpro.baidu.com",
   "ssp.baidu.com",
+  "adservice.baidu.com",
   "hm.baidu.com",
-  "vstat.baidu.com",
-  "baijiahao.baidu.com",
-  "fex.baidu.com",
-  "log.baidu.com",
-  "baidu.com",
-  "ms.bdstatic.com"
+  "track.baidu.com",
+  "baijiahao.baidu.com/api",
+  "baijiahao.baidu.com/v1"
 ];
 
-// 检查请求是否来自广告域名
-function isBlockedDomain(url) {
-  return blockedDomains.some(domain => url.includes(domain));
+// 明确的广告 JS 文件名
+const jsFileBlockList = [
+  "show_ads.js",
+  "adsbygoogle.js",
+  "track.js",
+  "cpro.js"
+];
+
+// 是否是广告类 JS
+function isAdScript(url) {
+  return adPattern.test(url) || jsBlockList.some(part => url.includes(part)) || jsFileBlockList.some(name => url.includes(name));
 }
 
-// 检查请求是否是广告资源
-function isBlockedRequest(url) {
-  // 精确匹配特定广告文件（如你提供的 share.js 文件）
-  if (url.includes("share.js")) {
-    return true; // 拦截该文件
-  }
-
-  return (
-    isBlockedDomain(url) && 
-    (url.includes("ads") || 
-     url.includes("promo") || 
-     url.includes("track") || 
-     url.includes("monitor") ||
-     url.includes("baijiahao") ||
-     /\.(jpg|png|gif|js|css|html|json|mp4)$/.test(url))
-  );
-}
-
-// 处理拦截的请求
-$httpClient.get = function(url, callback) {
-  if (isBlockedRequest(url)) {
-    callback({ status: 200, body: "" });  // 拒绝加载广告资源
-  } else {
-    $httpClient.get(url, callback);  // 正常加载非广告资源
-  }
-};
-
-// 如果是广告请求，拦截并返回403
-if (isBlockedRequest($request.url)) {
-  $done({ response: { statusCode: 403 } });  // 拦截广告请求
+// 如果是广告类 JS，阻断；否则放行
+if (isAdScript($request.url)) {
+  $done({ response: { status: 403, body: "" } });
 } else {
-  $done();  // 继续请求
+  $done();
 }
