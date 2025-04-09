@@ -1,17 +1,38 @@
 // 百度广告过滤脚本
-const blockedUrls = [
-  /baidu\.com\/.*(ads|promo|track|monitor|cpro|ssp|adlog|adservice|adx|fex|log|hm|vstat|cb|baijiahao)\b.*$/,
-  /baidu\.com\/.*\.(jpg|png|gif|js|css|html|json|mp4)$/,
-  /baidustatic\.com\/.*\.(js|css|gif|jpg|png|mp4|html|json)$/,
+const blockedDomains = [
+  "adservice.baidu.com",
+  "track.baidu.com",
+  "adlog.baidu.com",
+  "cpro.baidu.com",
+  "ssp.baidu.com",
+  "hm.baidu.com",
+  "vstat.baidu.com",
+  "baijiahao.baidu.com",
+  "fex.baidu.com",
+  "log.baidu.com",
+  "baidu.com"
 ];
 
-// 检查请求是否是广告或追踪请求
+// 检查请求是否来自广告域名
+function isBlockedDomain(url) {
+  return blockedDomains.some(domain => url.includes(domain));
+}
+
+// 检查请求是否是广告资源
 function isBlockedRequest(url) {
-  return blockedUrls.some(pattern => pattern.test(url));
+  return (
+    isBlockedDomain(url) && 
+    (url.includes("ads") || 
+     url.includes("promo") || 
+     url.includes("track") || 
+     url.includes("monitor") ||
+     url.includes("baijiahao") ||
+     /\.(jpg|png|gif|js|css|html|json|mp4)$/.test(url))
+  );
 }
 
 // 处理拦截的请求
-$httpClient.get = function (url, callback) {
+$httpClient.get = function(url, callback) {
   if (isBlockedRequest(url)) {
     callback({ status: 200, body: "" });  // 拒绝加载广告资源
   } else {
