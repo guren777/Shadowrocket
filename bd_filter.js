@@ -1,51 +1,91 @@
-// 百度精准广告拦截脚本
-// 适用于 Shadowrocket 的 http-request 阶段
-// 脚本类型：http-request
-// 作用：精准拦截百度、百家号的广告和追踪请求，避免误伤功能型 JS
+var adAttr = '#content_left';
+var hintAttr = '.hint_common_restop';
+var blockRecord = 0;
+var resultSummaryAttr = '.head_nums_cont_inner .nums'
+var blockSummaryAttr = '.head_nums_cont_inner .nums #blockNum'
+var blockSummaryHtml = '，<a href="https://github.com/zhangyazhong/baidu-adblock" style="text-decoration:none;">屏蔽商业推广</a>已为您屏蔽<span id="blockNum">' + blockRecord + '</span>个推广广告</div>';
+var date = new Date();
+var today = 'day' + date.getFullYear() + date.getMonth() + date.getDate();
+var total = 'totalBlock';
+var showBlockSummary = 'showBlockSummary';
 
-const adKeywordList = [
-  'cpro.baidu.com',
-  'ads',
-  'adservice',
-  'adx',
-  'track',
-  'log',
-  'hm.baidu.com',
-  'baijiahao.baidu.com/api/ad',
-  'baijiahao.baidu.com/v1/ad',
-  'ssp.baidu.com',
-  'monitor',
-  'promote',
-  'eclick'
-];
-
-// 白名单关键词：用于放行正常 JS（功能/排版脚本）
-const whitelistKeywordList = [
-  'fusion-components',
-  'share.js',
-  'layout',
-  'searchbox',
-  'theme',
-  'component',
-  'common'
-];
-
-const url = $request.url;
-
-// 判断是否命中广告关键词
-function isAd(url) {
-  return adKeywordList.some(keyword => url.includes(keyword));
+function isEmpty(obj) {
+    for (var property in obj){
+        return false;
+    }
+    return true;
 }
 
-// 判断是否是应放行的正常脚本
-function isWhitelisted(url) {
-  return whitelistKeywordList.some(keyword => url.includes(keyword));
+function showBlockSummary() {
+    if ($(blockSummaryAttr) === null || $(blockSummaryAttr).length < 1) {
+        $(resultSummaryAttr).append(blockSummaryHtml);
+    }
 }
 
-// 拦截逻辑
-if (isAd(url) && !isWhitelisted(url)) {
-  // 拦广告，但跳过白名单
-  $done({ response: { status: 403, body: '' } });
-} else {
-  $done(); // 放行
+function saveToHistory(blockCount) {
+    if (blockCount > 0) {
+        chrome.storage.local.get(total, function (result) {
+            if (result[total] === undefined) {
+                result[total] = 0;
+            }
+            result[total] += blockCount;
+            chrome.storage.local.set(result);
+        });
+        chrome.storage.local.get(today, function (result) {
+            if (result[today] === undefined) {
+                result[today] = 0;
+            }
+            result[today] += blockCount;
+            chrome.storage.local.set(result);
+        });
+    }
 }
+
+function block(dom) {
+    let tmpBlock = 0;
+    $.each(dom.children(), function(i, item) {
+        if ($(item).attr('id') === undefined || $(item).attr('id').length > 3) {
+            $(item).remove();
+            blockRecord++;
+            tmpBlock++;
+        } else if ($(item).find(".m").text().indexOf('广告') !== -1 || $(item).find(".m").text().indexOf('商业推广') !== -1) {
+            $(item).remove();
+            blockRecord++;
+            tmpBlock++;
+        }
+    });
+    if ($(blockSummaryAttr) !== null && $(blockSummaryAttr).length > 0) {
+        $(blockSummaryAttr).html(blockRecord);
+    }
+    window.setTimeout(function() {
+        saveToHistory(tmpBlock);
+    }, Math.floor(Math.random() * 1000));
+    dom.find(hintAttr).remove();
+}
+
+$('#wrapper').bind('DOMNodeInserted', function(e) {
+    if ($(e.target).find(adAttr).length > 0) {
+        block($(e.target).find(adAttr));
+    }
+});
+
+document.addEventListener('DOMNodeInserted', function() {
+    block($(adAttr));
+}, false);
+
+$(function() {
+    // chrome.storage.local.get(showBlockSummary, function (result) {
+    //     if (result[showBlockSummary] === undefined || result[showBlockSummary] > 0) {
+    //         var showBlockSummaryTimer = window.setInterval(function() {
+    //             if ($(blockSummaryAttr) === null || $(blockSummaryAttr).length < 1) {
+    //                 $(resultSummaryAttr).append(blockSummaryHtml);
+    //             }
+    //         }, 1000);
+    //     }
+    // });
+
+    // if (window.localStorage.getItem('showBlockSummary') === 'true') {
+    //     var showBlockSummaryTimer = window.setInterval("showBlockSummary()", 1000);
+    // }
+    block($(adAttr));
+});
