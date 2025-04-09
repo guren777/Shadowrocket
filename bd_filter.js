@@ -1,32 +1,65 @@
-// ==Script==
-// @name         百度搜索广告净化 v2
-// @description  精准移除百度搜索广告结果，避免误伤正常内容
-// @match        https://www.baidu.com/s*
-// ==/Script==
+// ==UserScript==
+// @name         Baidu AdBlocker
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Block Baidu Ads in Shadowrocket
+// @author       You
+// @match        *://*.baidu.com/*
+// @grant        none
+// ==/UserScript==
 
-let body = $response.body;
+(function() {
+    'use strict';
 
-if (body) {
-  try {
-    // 精确匹配常见广告 div（百度推广、广告标记）
-    const adPattern = /<div[^>]+id="(\d{5,})"[^>]*?>[\s\S]*?(广告|商业推广)[\s\S]*?<\/div>/g;
-    body = body.replace(adPattern, '');
+    // 需要屏蔽的广告请求的 URL 和资源
+    const blockedUrls = [
+        /baidu\.com\/.*(ads|promo|track|monitor|cpro|ssp|adlog|adservice|adx|fex|log|hm|vstat|cb|baijiahao)\b.*$/,
+        /baidu\.com\/.*\.(jpg|png|gif|js|css|html|json|mp4)$/,
+        /baidustatic\.com\/.*\.(js|css|gif|jpg|png|mp4|html|json)$/,
+    ];
 
-    // 可选：移除百度底部提示条中的推广信息
-    const hintPattern = /<div[^>]+class="hint_common_restop"[^>]*>[\s\S]*?<\/div>/g;
-    body = body.replace(hintPattern, '');
+    // 检查请求的 URL 是否属于广告或追踪请求
+    function isBlockedRequest(url) {
+        return blockedUrls.some(pattern => pattern.test(url));
+    }
 
-    // 可选：在顶部添加提示文字（如你希望用户看到广告被净化了）
-    body = body.replace(
-      /(<span[^>]*class="nums"[^>]*>.*?)(<\/span>)/,
-      '$1，已为您智能屏蔽推广结果$2'
-    );
+    // 拦截请求并阻止广告
+    function interceptRequest(request) {
+        if (isBlockedRequest(request.url)) {
+            request.abort();  // 拒绝加载广告资源
+        } else {
+            request.continue();  // 正常加载非广告资源
+        }
+    }
 
-    $done({ body });
-  } catch (e) {
-    console.log('处理出错:', e);
-    $done({});
-  }
-} else {
-  $done({});
-}
+    // 拦截页面的加载请求
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+        if (isBlockedRequest(url)) {
+            return Promise.resolve(new Response(null, { status: 403 }));  // 直接返回 403 错误
+        }
+        return originalFetch(url, options);
+    };
+
+    // 捕获 XMLHttpRequest 并拦截广告请求
+    const originalXMLHttpRequestOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+        if (isBlockedRequest(url)) {
+            return;  // 阻止广告请求
+        }
+        return originalXMLHttpRequestOpen.apply(this, arguments);
+    };
+
+    // 执行广告屏蔽
+    function blockAds() {
+        const adElements = document.querySelectorAll('div, span, a, img');
+        adElements.forEach(element => {
+            if (element.innerHTML && (element.innerHTML.includes('广告') || element.innerHTML.includes('商业推广'))) {
+                element.style.display = 'none';  // 隐藏广告元素
+            }
+        });
+    }
+
+    // 每隔一段时间刷新页面的广告屏蔽
+    setInterval(blockAds, 1000);
+})();
