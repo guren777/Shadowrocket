@@ -21,8 +21,8 @@ function isBlockedDomain(url) {
 
 // 检查请求是否是广告资源
 function isBlockedRequest(url) {
-  // 精确匹配特定广告文件（如你提供的 JavaScript 文件）
-  if (url.includes("bdetpl_1974f6f.js")) {
+  // 精确匹配特定广告文件（如你提供的 share.js 文件）
+  if (url.includes("share.js")) {
     return true; // 拦截该文件
   }
 
