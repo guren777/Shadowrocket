@@ -10,7 +10,8 @@ const blockedDomains = [
   "baijiahao.baidu.com",
   "fex.baidu.com",
   "log.baidu.com",
-  "baidu.com"
+  "baidu.com",
+  "ms.bdstatic.com"
 ];
 
 // 检查请求是否来自广告域名
@@ -20,6 +21,11 @@ function isBlockedDomain(url) {
 
 // 检查请求是否是广告资源
 function isBlockedRequest(url) {
+  // 精确匹配特定广告文件（如你提供的 JavaScript 文件）
+  if (url.includes("bdetpl_1974f6f.js")) {
+    return true; // 拦截该文件
+  }
+
   return (
     isBlockedDomain(url) && 
     (url.includes("ads") || 
