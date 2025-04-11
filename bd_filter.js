@@ -1,30 +1,61 @@
-/**
- * 百度广告拦截脚本
- * 功能：拦截百度首页、搜索结果页面的广告元素及相关资源
- * Author: GPT-4
- * 适用于 Shadowrocket / QuantumultX
- * 
- */
+// ==Script==
+// @name         Shadowrocket - Baidu Precise AdBlock
+// @match        *://*.baidu.com/*
+// ==/Script==
 
-// 定义网页响应处理逻辑
 let body = $response.body;
 
-// 正则匹配广告内容，去除百度广告
-body = body.replace(/<div[^>]+class="?s_top_ad_banner"?[^>]*>[\s\S]*?<\/div>/gi, ''); // 移除首页广告
-body = body.replace(/<div[^>]+data-tuiguang[^>]*>[\s\S]*?<\/div>/gi, ''); // 搜索结果广告
-body = body.replace(/<span[^>]*>广告<\/span>/gi, ''); // 移除广告文字
-body = body.replace(/"isAd":true,[^}]*}/gi, ''); // 去除广告标记
-body = body.replace(/"ad_type":\d+,[^}]*}/gi, ''); // 移除广告类型标记
+// 保证只处理 HTML/JSON 内容
+if (!body || typeof body !== 'string') {
+  $done({});
+  return;
+}
 
-// 清理百度统计和推送脚本
-body = body.replace(/<script[^>]+hm\.baidu\.com[^<]+<\/script>/gi, ''); // 移除百度统计
-body = body.replace(/<script[^>]+push\.zhanzhang\.baidu\.com[^<]+<\/script>/gi, ''); // 移除百度推送
+// 判断 HTML 页面
+if (body.includes('<html') || body.includes('<!DOCTYPE html')) {
+  // 删除包含“data-tuiguang”属性的推广结果
+  body = body.replace(/<div[^>]+data-tuiguang[^>]*>[\s\S]*?<\/div>/gi, '');
 
-// 插入CSS和JS，阻止其他广告加载
-body = body.replace(/<\/title>/gi, '</title>\
-<link rel="stylesheet" href="https://limbopro.com/CSS/Adblock4limbo.user.css" type="text/css" />\
-<script type="text/javascript" async="async" src="https://limbopro.com/Adguard/Adblock4limbo.user.js"></script>\
-');
+  // 删除 class 含广告标识的块（不删除主要搜索容器）
+  body = body.replace(/<div[^>]+class="[^"]*(ec-ad|ec-pc-trust|result-op)[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '');
 
-// 返回修改后的响应体
+  // 删除百度知道广告模块（顶部/底部的 ad-container）
+  body = body.replace(/<div[^>]+class="zhidao_ad[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '');
+
+  // 删除百度统计、站长推送等脚本
+  body = body.replace(/<script[^>]*?(hm|zhanzhang)\.baidu\.com[^<]*?<\/script>/gi, '');
+}
+
+// 判断 JSON 类型响应（如搜索结果接口）
+if (body.trim().startsWith('{') || body.trim().startsWith('[')) {
+  try {
+    const json = JSON.parse(body);
+
+    // 针对常见广告字段进行清除（如广告数组、isAd 标志等）
+    function deepClean(obj) {
+      if (Array.isArray(obj)) {
+        return obj.filter(item => !(item && (item.isAd || item.ad_type || item.cm_ext || item.tpl_conf)));
+      } else if (typeof obj === 'object' && obj !== null) {
+        for (const key in obj) {
+          if (
+            key.toLowerCase().includes('ad') ||
+            key === 'cm_ext' || key === 'adData' || key === 'ad_info'
+          ) {
+            delete obj[key];
+          } else {
+            obj[key] = deepClean(obj[key]);
+          }
+        }
+      }
+      return obj;
+    }
+
+    const cleaned = deepClean(json);
+    body = JSON.stringify(cleaned);
+  } catch (e) {
+    // 非标准 JSON，跳过处理
+  }
+}
+
+// 返回干净的响应体
 $done({ body });
