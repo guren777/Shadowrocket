@@ -15,13 +15,13 @@ if (!body || typeof body !== 'string') {
 if (body.includes('<html') || body.includes('<!DOCTYPE html')) {
 
   // 1. 匹配并隐藏包含广告、推广、百度推广等关键词的完整广告条目
-  body = body.replace(/(<div[^>]+>[\s\S]*?(广告|商业推广|百度推广)[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
+  body = body.replace(/(<div[^>]+>[\s\S]*?(广告|商业推广|百度推广|百度广告)[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
 
   // 2. 隐藏带有 'data-tuiguang' 属性的广告模块
   body = body.replace(/(<div[^>]+data-tuiguang[^>]*>[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
 
   // 3. 隐藏包含广告标识的元素，如 'ec-ad', 'ec-pc-trust', 'result-op', 'adsbygoogle'
-  body = body.replace(/(<div[^>]+class="[^"]*(ec-ad|ec-pc-trust|result-op|adsbygoogle)[^"]*"[^>]*>[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
+  body = body.replace(/(<div[^>]+class="[^"]*(ec-ad|ec-pc-trust|result-op|adsbygoogle|pos|baidu_ad)[^"]*"[^>]*>[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
 
   // 4. 隐藏百度知道页面的广告模块
   body = body.replace(/(<div[^>]+class="zhidao_ad[^"]*"[^>]*>[\s\S]*?<\/div>)/gi, '<div style="display:none!important;">$1</div>');
