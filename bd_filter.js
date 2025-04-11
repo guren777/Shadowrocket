@@ -1,25 +1,20 @@
 // ==UserScript==
-// @name         百度搜索推广广告屏蔽
+// @name         百度推广广告精准屏蔽
 // @match        *://*.baidu.com/*
 // ==/UserScript==
 
 let body = $response.body;
 
 if (body && typeof body === 'string') {
-  // 替换带有“推广”、“广告”关键词的 div，防止它们显示
-  body = body.replace(/<div[^>]*?>(.*?)?(推广|商业推广|广告)(.*?)?<\/div>/gi, match => {
-    return `<div style="display:none!important;">${match}</div>`;
-  });
+  // 删除 ID 或 class 标识为广告推广的搜索结果（精准广告模块）
+  body = body.replace(/<div[^>]+id="(\d+)"[^>]*data-is-mainline="false"[^>]*>([\s\S]*?)<\/div>/gi, '');
 
-  // 移除特定 class 的推广模块
-  const adClasses = ['ec_ad_results', 'ec_wise_ad', 'ad-block', 'result-op', 'ec-pc-trust', 'c-container-op'];
-  adClasses.forEach(cls => {
-    const regex = new RegExp(`<div[^>]+class="[^"]*${cls}[^"]*"[^>]*>[\\s\\S]*?<\\/div>`, 'gi');
-    body = body.replace(regex, match => `<div style="display:none!important;">${match}</div>`);
-  });
+  // 删除含 "data-tuiguang" 或 class 中含 "ec_" 的模块（百度广告标识）
+  body = body.replace(/<div[^>]+data-tuiguang[^>]*>[\s\S]*?<\/div>/gi, '');
+  body = body.replace(/<div[^>]+class="[^"]*ec_[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '');
 
-  // 特定标识广告 JSON 内容（部分页面通过 script 注入）
-  body = body.replace(/<script[^>]+>[\s\S]*?(广告|cpro|guanggao)[\s\S]*?<\/script>/gi, '');
+  // 删除包含 “广告” / “商业推广” 标识的小标签，仅限广告标识，不影响正常文字
+  body = body.replace(/<span[^>]*>(广告|商业推广)<\/span>/gi, '');
 
   $done({ body });
 } else {
