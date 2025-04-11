@@ -1,65 +1,95 @@
 // ==UserScript==
-// @name         Baidu AdBlocker
+// @name         Baidu AdBlocker Full (with URL Interception)
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Block Baidu Ads in Shadowrocket
-// @author       You
+// @version      1.1
+// @description  Block Baidu ads via URL interception and DOM cleanup (Like Adblock4limbo.js logic)
+// @author       GPT
 // @match        *://*.baidu.com/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // 需要屏蔽的广告请求的 URL 和资源
-    const blockedUrls = [
-        /baidu\.com\/.*(ads|promo|track|monitor|cpro|ssp|adlog|adservice|adx|fex|log|hm|vstat|cb|baijiahao)\b.*$/,
-        /baidu\.com\/.*\.(jpg|png|gif|js|css|html|json|mp4)$/,
-        /baidustatic\.com\/.*\.(js|css|gif|jpg|png|mp4|html|json)$/,
+    // 拦截广告资源的 URL 关键词正则列表
+    const blockedUrlPatterns = [
+        /cpro\.baidu\.com/,
+        /pos\.baidu\.com/,
+        /hm\.baidu\.com/,
+        /log.*\.baidu\.com/,
+        /track/,
+        /ssp\.baidu\.com/,
+        /adservice/,
+        /adx/,
+        /cb\.baidu\.com/,
+        /baidustatic\.com\/.*(cpro|ads|log|hm)/,
+        /push\.zhanzhang\.baidu\.com/,
+        /monitor/,
     ];
 
-    // 检查请求的 URL 是否属于广告或追踪请求
-    function isBlockedRequest(url) {
-        return blockedUrls.some(pattern => pattern.test(url));
+    // 判断请求 URL 是否为广告
+    function isBlockedUrl(url) {
+        return blockedUrlPatterns.some(pattern => pattern.test(url));
     }
 
-    // 拦截请求并阻止广告
-    function interceptRequest(request) {
-        if (isBlockedRequest(request.url)) {
-            request.abort();  // 拒绝加载广告资源
-        } else {
-            request.continue();  // 正常加载非广告资源
-        }
-    }
-
-    // 拦截页面的加载请求
+    // 拦截 fetch 请求
     const originalFetch = window.fetch;
-    window.fetch = function(url, options) {
-        if (isBlockedRequest(url)) {
-            return Promise.resolve(new Response(null, { status: 403 }));  // 直接返回 403 错误
+    window.fetch = function (input, init) {
+        const url = typeof input === 'string' ? input : input.url;
+        if (isBlockedUrl(url)) {
+            console.warn('[AdBlocker] blocked fetch:', url);
+            return Promise.resolve(new Response(null, { status: 403, statusText: 'Blocked by AdBlocker' }));
         }
-        return originalFetch(url, options);
+        return originalFetch.apply(this, arguments);
     };
 
-    // 捕获 XMLHttpRequest 并拦截广告请求
-    const originalXMLHttpRequestOpen = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-        if (isBlockedRequest(url)) {
-            return;  // 阻止广告请求
+    // 拦截 XMLHttpRequest 请求
+    const originalXHROpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function (method, url, ...args) {
+        if (isBlockedUrl(url)) {
+            console.warn('[AdBlocker] blocked xhr:', url);
+            this.abort(); // 主动终止请求
+            return;
         }
-        return originalXMLHttpRequestOpen.apply(this, arguments);
+        return originalXHROpen.call(this, method, url, ...args);
     };
 
-    // 执行广告屏蔽
-    function blockAds() {
-        const adElements = document.querySelectorAll('div, span, a, img');
-        adElements.forEach(element => {
-            if (element.innerHTML && (element.innerHTML.includes('广告') || element.innerHTML.includes('商业推广'))) {
-                element.style.display = 'none';  // 隐藏广告元素
-            }
+    // 广告关键词
+    const adKeywords = ['广告', '商业推广', '百度推广', '品牌广告'];
+
+    // 检查元素是否包含广告文字
+    function isAdElement(el) {
+        const text = el.textContent || '';
+        return adKeywords.some(kw => text.includes(kw));
+    }
+
+    // 清理页面广告元素
+    function cleanAdElements() {
+        const adSelectors = [
+            '[data-tuiguang]',
+            '.ec-pc-trust',
+            '.result-op',
+            '.ad-block',
+            '.ec-ad',
+            '.adsbygoogle',
+            '#content_left > div',
+        ];
+        adSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                if (isAdElement(el)) {
+                    el.remove();
+                }
+            });
         });
     }
 
-    // 每隔一段时间刷新页面的广告屏蔽
-    setInterval(blockAds, 1000);
+    // 初始执行清理
+    cleanAdElements();
+
+    // 监听 DOM 变化进行动态广告清理
+    const observer = new MutationObserver(cleanAdElements);
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 })();
